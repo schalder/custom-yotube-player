@@ -134,5 +134,12 @@ document.addEventListener('contextmenu', function(event) {
         event.preventDefault();
     }
 });
+
+// Load Font Awesome for icons
+const faScript = document.createElement('script');
+faScript.src = 'https://kit.fontawesome.com/c2410f4356.js';
+faScript.crossOrigin = 'anonymous';
+document.head.appendChild(faScript);
+</script>
 </script>
 
