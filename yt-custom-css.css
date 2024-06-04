@@ -1,10 +1,32 @@
 .video-container {
     position: relative;
-    max-width: 912px;
-    max-height: 510px;
-    margin: auto;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
     background: black;
 }
+
+.video-container .player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-overlay, .custom-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    cursor: pointer;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .video-container iframe {
     width: 100%;
     height: 510px;
