@@ -1,66 +1,37 @@
-
-// Dynamically set the height of video containers based on data-height attribute
-const setVideoContainerHeight = () => {
-    const videoContainers = document.querySelectorAll('.video-container');
-    videoContainers.forEach(container => {
-        const height = container.dataset.height;
-        container.style.height = height + 'px';
-    });
-};
-
-// Call the function directly
-setVideoContainerHeight();
-
+let player;
 function onYouTubeIframeAPIReady() {
-    const videoContainers = document.querySelectorAll('.video-container');
-    videoContainers.forEach((container, index) => {
-        const playerElement = container.querySelector('.player');
-        const videoId = container.getAttribute('data-video-id');
-        const width = container.getAttribute('data-width');
-        const height = container.getAttribute('data-height');
-
-        // Set custom properties for width and height
-        container.style.setProperty('--custom-width', `${width}px`);
-        container.style.setProperty('--custom-height', `${height}px`);
-
-        const player = new YT.Player(playerElement, {
-            height: height,
-            width: width,
-            videoId: videoId,
-            playerVars: {
-                'playsinline': 1,
-                'autoplay': 0,
-                'controls': 0,
-                'showinfo': 0,
-                'rel': 0,
-                'modestbranding': 1,
-                'iv_load_policy': 3,
-                'disablekb': 1,
-                'fs': 0,
-                'origin': window.location.origin
-            },
-            events: {
-                'onReady': (event) => onPlayerReady(event, container),
-                'onStateChange': (event) => onPlayerStateChange(event, container)
-            }
-        });
-        container.player = player;
+    player = new YT.Player('player', {
+        height: '360',
+        width: '640',
+        videoId: 'i9ak-e2zt-Y',
+        playerVars: {
+            'playsinline': 1,
+            'autoplay': 0,
+            'controls': 0,
+            'showinfo': 0,
+            'rel': 0,
+            'modestbranding': 1,
+            'iv_load_policy': 3,
+            'disablekb': 1,
+            'fs': 0,
+            'origin': window.location.origin
+        },
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
     });
 }
 
-// Additional JavaScript functions remain unchanged
-
-
-function onPlayerReady(event, container) {
-    const player = container.player;
-    const playPauseButton = container.querySelector('.play-pause');
-    const customPlayButton = container.querySelector('.custom-play-button');
-    const muteUnmuteButton = container.querySelector('.mute-unmute');
-    const progressBar = container.querySelector('.progress');
-    const volumeControl = container.querySelector('.volume');
-    const videoOverlay = container.querySelector('.video-overlay');
-    const customControls = container.querySelector('.custom-controls');
-    const timeDisplay = container.querySelector('.time-display');
+function onPlayerReady(event) {
+    const playPauseButton = document.getElementById('play-pause');
+    const customPlayButton = document.getElementById('custom-play-button');
+    const muteUnmuteButton = document.getElementById('mute-unmute');
+    const progressBar = document.getElementById('progress');
+    const volumeControl = document.getElementById('volume');
+    const videoOverlay = document.getElementById('video-overlay');
+    const customControls = document.getElementById('custom-controls');
+    const timeDisplay = document.getElementById('time-display');
 
     customPlayButton.onclick = videoOverlay.onclick = function() {
         if (player.getPlayerState() === YT.PlayerState.PLAYING) {
@@ -112,24 +83,22 @@ function onPlayerReady(event, container) {
         timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds} / ${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
     }, 1000);
 
-    container.addEventListener('mouseover', () => {
+    document.querySelector('.video-container').addEventListener('mouseover', () => {
         customControls.style.opacity = 1;
     });
 
-    container.addEventListener('mouseout', () => {
+    document.querySelector('.video-container').addEventListener('mouseout', () => {
         customControls.style.opacity = 0;
     });
 }
 
-function onPlayerStateChange(event, container) {
-    const player = container.player;
-    const playPauseButton = container.querySelector('.play-pause');
-    const customPlayButton = container.querySelector('.custom-play-button');
-    const videoOverlay = container.querySelector('.video-overlay');
+function onPlayerStateChange(event) {
+    const playPauseButton = document.getElementById('play-pause');
+    const customPlayButton = document.getElementById('custom-play-button');
+    const videoOverlay = document.getElementById('video-overlay');
 
     if (event.data === YT.PlayerState.PLAYING) {
         playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
-        customPlayButton.style.display = 'none'; //
         customPlayButton.style.display = 'none'; // Hide custom play button when playing
     } else {
         playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
@@ -138,7 +107,7 @@ function onPlayerStateChange(event, container) {
 
     if (event.data === YT.PlayerState.ENDED) {
         customPlayButton.style.display = 'block'; // Show custom play button when video ends
-        videoOverlay.style.background = `url('https://img.youtube.com/vi/${player.getVideoData().video_id}/maxresdefault.jpg') no-repeat center center`;
+        videoOverlay.style.background = `url('https://img.youtube.com/vi/i9ak-e2zt-Y/0.jpg') no-repeat center center`;
         videoOverlay.style.backgroundSize = 'cover';
     } else {
         videoOverlay.style.background = 'transparent'; // Remove background when not ended
@@ -149,6 +118,12 @@ function onPlayerStateChange(event, container) {
     }
 }
 
+// Load YouTube API script
+const tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
 // Disable right-click context menu on the iframe
 document.addEventListener('contextmenu', function(event) {
     if (event.target.nodeName === 'IFRAME') {
@@ -156,3 +131,8 @@ document.addEventListener('contextmenu', function(event) {
     }
 });
 
+// Load Font Awesome for icons
+const faScript = document.createElement('script');
+faScript.src = 'https://kit.fontawesome.com/c2410f4356.js';
+faScript.crossOrigin = 'anonymous';
+document.head.appendChild(faScript);
