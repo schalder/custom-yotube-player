@@ -131,8 +131,31 @@ document.addEventListener('contextmenu', function(event) {
     }
 });
 
+
+// Append the provided script at the end
+document.addEventListener("DOMContentLoaded", function() {
+    const videoSections = document.querySelectorAll('.video-section');
+
+    videoSections.forEach((section, index) => {
+        const videoId = section.dataset.videoId;
+        const width = section.dataset.width || 640; // Default width if not provided
+        const height = section.dataset.height || 360; // Default height if not provided
+        const playerId = `player${index + 1}`;
+
+        const playerContainer = section.querySelector('.video-container');
+        playerContainer.style.maxWidth = width + 'px';
+        playerContainer.style.maxHeight = height + 'px';
+        playerContainer.id = playerId;
+
+        onYouTubeIframeAPIReady(videoId, playerId);
+    });
+});
+
+
 // Load Font Awesome for icons
 const faScript = document.createElement('script');
 faScript.src = 'https://kit.fontawesome.com/c2410f4356.js';
 faScript.crossOrigin = 'anonymous';
 document.head.appendChild(faScript);
+
+
