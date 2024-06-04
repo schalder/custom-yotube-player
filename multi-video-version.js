@@ -35,6 +35,9 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
+// Additional JavaScript functions remain unchanged
+
+
 function onPlayerReady(event, container) {
     const player = container.player;
     const playPauseButton = container.querySelector('.play-pause');
