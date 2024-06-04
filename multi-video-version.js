@@ -1,9 +1,11 @@
 let players = [];
 
 function onYouTubeIframeAPIReady() {
+    console.log("YouTube Iframe API is ready.");
     document.querySelectorAll('.video-container').forEach((container, index) => {
         const videoId = container.getAttribute('data-video-id');
         const playerElement = container.querySelector('.player');
+        console.log(`Initializing player ${index} with video ID ${videoId}`);
 
         players[index] = new YT.Player(playerElement, {
             height: '360',
@@ -31,6 +33,7 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(index) {
     return function(event) {
+        console.log(`Player ${index} is ready.`);
         const container = document.querySelectorAll('.video-container')[index];
         const playPauseButton = container.querySelector('.play-pause');
         const customPlayButton = container.querySelector('.custom-play-button');
@@ -102,6 +105,7 @@ function onPlayerReady(index) {
 
 function onPlayerStateChange(index) {
     return function(event) {
+        console.log(`Player ${index} state changed to ${event.data}.`);
         const container = document.querySelectorAll('.video-container')[index];
         const playPauseButton = container.querySelector('.play-pause');
         const customPlayButton = container.querySelector('.custom-play-button');
