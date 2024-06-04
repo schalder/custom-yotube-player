@@ -110,31 +110,30 @@ function onPlayerStateChange(index) {
     return function(event) {
         console.log(`Player ${index} state changed to ${event.data}.`);
         const container = document.querySelectorAll('.video-container')[index];
-        const playPauseButton = container.querySelector('.play-pause');
         const customPlayButton = container.querySelector('.custom-play-button');
         const videoOverlay = container.querySelector('.video-overlay');
 
         if (event.data === YT.PlayerState.PLAYING) {
-            playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
             customPlayButton.style.display = 'none'; // Hide custom play button when playing
         } else {
-            playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
             customPlayButton.style.display = 'block'; // Show custom play button when paused or ended
         }
 
         if (event.data === YT.PlayerState.ENDED) {
             customPlayButton.style.display = 'block'; // Show custom play button when video ends
-            videoOverlay.style.background = `url('https://img.youtube.com/vi/${container.getAttribute('data-video-id')}/0.jpg') no-repeat center center`;
+            videoOverlay.style.background = `url('https://img.youtube.com/vi/${container.getAttribute('data-video-id')}/maxresdefault.jpg') no-repeat center center`;
             videoOverlay.style.backgroundSize = 'cover';
         } else {
             videoOverlay.style.background = 'transparent'; // Remove background when not ended
         }
 
         if (event.data === YT.PlayerState.PAUSED) {
-            players[index].seekTo(players[index].getCurrentTime(), true); // Reload the current video frame without suggested videos
+            videoOverlay.style.background = `url('https://img.youtube.com/vi/${container.getAttribute('data-video-id')}/maxresdefault.jpg') no-repeat center center`;
+            videoOverlay.style.backgroundSize = 'cover';
         }
     };
 }
+
 
 // Disable right-click context menu on the iframe
 document.addEventListener('contextmenu', function(event) {
