@@ -85,7 +85,6 @@
 /* Media query for smaller screens */
 @media screen and (max-width: 640px) {
     .custom-controls {
-        flex-wrap: wrap;
         justify-content: center;
     }
 
