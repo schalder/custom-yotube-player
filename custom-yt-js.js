@@ -1,5 +1,4 @@
-
-<script>
+// custom-yt-player.js
 function onPlayerReady(event) {
     const playPauseButton = document.getElementById('play-pause');
     const customPlayButton = document.getElementById('custom-play-button');
@@ -95,26 +94,9 @@ function onPlayerStateChange(event) {
     }
 }
 
-
-
-// Load YouTube API script
-const tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-const firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
 // Disable right-click context menu on the iframe
 document.addEventListener('contextmenu', function(event) {
     if (event.target.nodeName === 'IFRAME') {
         event.preventDefault();
     }
 });
-
-// Load Font Awesome for icons
-const faScript = document.createElement('script');
-faScript.src = 'https://kit.fontawesome.com/c2410f4356.js';
-faScript.crossOrigin = 'anonymous';
-document.head.appendChild(faScript);
-</script>
-</script>
-
