@@ -1,33 +1,3 @@
-function onYouTubeIframeAPIReady() {
-    const videoContainers = document.querySelectorAll('.video-container');
-    videoContainers.forEach((container, index) => {
-        const playerElement = container.querySelector('.player');
-        const videoId = container.getAttribute('data-video-id');
-        const player = new YT.Player(playerElement, {
-            height: '510',
-            width: '912',
-            videoId: videoId,
-            playerVars: {
-                'playsinline': 1,
-                'autoplay': 0,
-                'controls': 0,
-                'showinfo': 0,
-                'rel': 0,
-                'modestbranding': 1,
-                'iv_load_policy': 3,
-                'disablekb': 1,
-                'fs': 0,
-                'origin': window.location.origin
-            },
-            events: {
-                'onReady': (event) => onPlayerReady(event, container),
-                'onStateChange': (event) => onPlayerStateChange(event, container)
-            }
-        });
-        container.player = player;
-    });
-}
-
 function onPlayerReady(event, container) {
     const player = container.player;
     const playPauseButton = container.querySelector('.play-pause');
