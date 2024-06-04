@@ -1,9 +1,7 @@
-/* Base styles for the video container */
 .video-container {
     position: relative;
     margin: auto;
     background: black;
-    display: inline-block;
     width: var(--custom-width);
     height: var(--custom-height);
 }
