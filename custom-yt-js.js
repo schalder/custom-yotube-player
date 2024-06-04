@@ -1,30 +1,5 @@
 
 <script>
-let player;
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
-        height: '510',
-        width: '912',
-        videoId: '4t1Z-9fEjI8',
-        playerVars: {
-            'playsinline': 1,
-            'autoplay': 0,
-            'controls': 0,
-            'showinfo': 0,
-            'rel': 0,
-            'modestbranding': 1,
-            'iv_load_policy': 3,
-            'disablekb': 1,
-            'fs': 0,
-            'origin': window.location.origin
-        },
-        events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-        }
-    });
-}
-
 function onPlayerReady(event) {
     const playPauseButton = document.getElementById('play-pause');
     const customPlayButton = document.getElementById('custom-play-button');
