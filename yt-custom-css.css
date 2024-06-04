@@ -1,99 +1,87 @@
-.video-container {
-    position: relative;
-    margin: auto;
-    background: black;
-    width: var(--custom-width);
-    height: var(--custom-height);
-}
-
-.video-container iframe {
-    width: 100%;
-    height: 100%;
-}
-
-.video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    cursor: pointer;
-    background: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#custom-play-button {
-    display: block;
-    width: 160px;
-    height: 160px;
-    background: url('https://pixellucy.com/wp-content/uploads/2021/07/wistia-play-button.png') no-repeat center center;
-    background-size: contain;
-}
-
-.custom-controls {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    z-index: 20;
-    transition: opacity 0.3s;
-    opacity: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Custom styling for the progress bar */
-.custom-controls input[type="range"]#progress {
-    flex: 1;
-    margin-right: 10px;
-    margin-left: 10px;
-    background: #555; /* Default color for the progress bar */
-    --slider-value: 0;
-}
-
-/* Played part of the progress bar colored in blue */
-.custom-controls input[type="range"]#progress::-webkit-slider-runnable-track {
-    background: linear-gradient(to right, #3b5998 var(--slider-value)%, #555 var(--slider-value)%);
-}
-
-.custom-controls input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 15px;
-    height: 15px;
-    background: #fff;
-    border-radius: 50%;
-}
-
-/* Remaining part of the progress bar colored in red */
-.custom-controls input[type="range"]#progress::-moz-range-progress {
-    background-color: #FF0000;
-}
-
-.custom-controls input[type="range"]#progress::-moz-range-track {
-    background-color: #555;
-}
-
-.custom-controls input[type="range"]#volume {
-    width: 100px;
-    margin-left: 10px;
-}
-
-#time-display {
-    color: #fff;
-    padding: 0px 8px;
-}
-
-.ytp-expand-pause-overlay .ytp-pause-overlay {
-    display: none !important;
-}
-
+<style>
+        .video-container {
+            position: relative;
+            max-width: 912px;
+            max-height: 510px;
+            margin: auto;
+            background: black;
+        }
+        .video-container iframe {
+            width: 100%;
+          height: 510px;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            cursor: pointer;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #custom-play-button {
+            display: block;
+            width: 160px;
+            height: 160px;
+            background: url('https://pixellucy.com/wp-content/uploads/2021/07/wistia-play-button.png') no-repeat center center;
+            background-size: contain;
+        }
+        .custom-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+          width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            z-index: 20;
+            transition: opacity 0.3s;
+            opacity: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* Custom styling for the progress bar */
+        .custom-controls input[type="range"]#progress {
+            flex: 1;
+            margin-right: 10px;
+          margin-left: 10px;
+            background: #555; /* Default color for the progress bar */
+            --slider-value: 0;
+        }
+        /* Played part of the progress bar colored in blue */
+        .custom-controls input[type="range"]#progress::-webkit-slider-runnable-track {
+            background: linear-gradient(to right, #3b5998 var(--slider-value)%, #555 var(--slider-value)%);
+        }
+        .custom-controls input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #fff;
+            border-radius: 50%;
+        }
+        /* Remaining part of the progress bar colored in red */
+        .custom-controls input[type="range"]#progress::-moz-range-progress {
+            background-color: #FF0000;
+        }
+        .custom-controls input[type="range"]#progress::-moz-range-track {
+            background-color: #555;
+        }
+        .custom-controls input[type="range"]#volume {
+            width: 100px;
+            margin-left: 10px;
+        }
+       #time-display{
+       color: #fff;
+         padding: 0px 8px;
+       }
+       .ytp-expand-pause-overlay .ytp-pause-overlay{
+       display: none !important;
+       }
 /* Media query for smaller screens */
 @media screen and (max-width: 640px) {
     .custom-controls {
@@ -108,12 +96,8 @@
     .custom-controls input[type="range"] {
         width: calc(100% - 20px);
     }
-
-    .video-container {
-        width: 100%;
-    }
-
-    .video-container iframe {
-        height: auto;
-    }
+  
+  .video-container iframe {
+    height: 230px;
+}
 }
