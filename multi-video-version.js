@@ -1,27 +1,3 @@
-let player;
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
-        height: '360',
-        width: '640',
-        videoId: 'i9ak-e2zt-Y',
-        playerVars: {
-            'playsinline': 1,
-            'autoplay': 0,
-            'controls': 0,
-            'showinfo': 0,
-            'rel': 0,
-            'modestbranding': 1,
-            'iv_load_policy': 3,
-            'disablekb': 1,
-            'fs': 0,
-            'origin': window.location.origin
-        },
-        events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-        }
-    });
-}
 
 function onPlayerReady(event) {
     const playPauseButton = document.getElementById('play-pause');
@@ -131,31 +107,8 @@ document.addEventListener('contextmenu', function(event) {
     }
 });
 
-
-// Append the provided script at the end
-document.addEventListener("DOMContentLoaded", function() {
-    const videoSections = document.querySelectorAll('.video-section');
-
-    videoSections.forEach((section, index) => {
-        const videoId = section.dataset.videoId;
-        const width = section.dataset.width || 640; // Default width if not provided
-        const height = section.dataset.height || 360; // Default height if not provided
-        const playerId = `player${index + 1}`;
-
-        const playerContainer = section.querySelector('.video-container');
-        playerContainer.style.maxWidth = width + 'px';
-        playerContainer.style.maxHeight = height + 'px';
-        playerContainer.id = playerId;
-
-        onYouTubeIframeAPIReady(videoId, playerId);
-    });
-});
-
-
 // Load Font Awesome for icons
 const faScript = document.createElement('script');
 faScript.src = 'https://kit.fontawesome.com/c2410f4356.js';
 faScript.crossOrigin = 'anonymous';
 document.head.appendChild(faScript);
-
-
