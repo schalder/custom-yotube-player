@@ -5,6 +5,11 @@ function onYouTubeIframeAPIReady() {
         const videoId = container.getAttribute('data-video-id');
         const width = container.getAttribute('data-width');
         const height = container.getAttribute('data-height');
+
+        // Apply width and height as CSS custom properties
+        container.style.setProperty('--custom-width', `${width}px`);
+        container.style.setProperty('--custom-height', `${height}px`);
+
         const player = new YT.Player(playerElement, {
             height: height,
             width: width,
@@ -110,6 +115,7 @@ function onPlayerStateChange(event, container) {
 
     if (event.data === YT.PlayerState.PLAYING) {
         playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
+        customPlayButton.style.display = 'none'; //
         customPlayButton.style.display = 'none'; // Hide custom play button when playing
     } else {
         playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
