@@ -5,11 +5,14 @@ function onYouTubeIframeAPIReady() {
     document.querySelectorAll('.video-container').forEach((container, index) => {
         const videoId = container.getAttribute('data-video-id');
         const playerElement = container.querySelector('.player');
-        console.log(`Initializing player ${index} with video ID ${videoId}`);
+        const width = container.getAttribute('data-width') || '100%';
+        const height = container.getAttribute('data-height') || '100%';
+
+        console.log(`Initializing player ${index} with video ID ${videoId}, width ${width}, height ${height}`);
 
         players[index] = new YT.Player(playerElement, {
-            height: '360',
-            width: '640',
+            height: height,
+            width: width,
             videoId: videoId,
             playerVars: {
                 'playsinline': 1,
