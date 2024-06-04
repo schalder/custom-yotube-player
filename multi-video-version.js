@@ -1,3 +1,16 @@
+
+// Dynamically set the height of video containers based on data-height attribute
+const setVideoContainerHeight = () => {
+    const videoContainers = document.querySelectorAll('.video-container');
+    videoContainers.forEach(container => {
+        const height = container.dataset.height;
+        container.style.height = height + 'px';
+    });
+};
+
+// Call the function directly
+setVideoContainerHeight();
+
 function onYouTubeIframeAPIReady() {
     const videoContainers = document.querySelectorAll('.video-container');
     videoContainers.forEach((container, index) => {
@@ -141,14 +154,5 @@ document.addEventListener('contextmenu', function(event) {
     if (event.target.nodeName === 'IFRAME') {
         event.preventDefault();
     }
-});
-
-// Dynamically set the height of video containers based on data-height attribute
-window.addEventListener('DOMContentLoaded', function() {
-    const videoContainers = document.querySelectorAll('.video-container');
-    videoContainers.forEach(container => {
-        const height = container.dataset.height;
-        container.style.height = height + 'px';
-    });
 });
 
