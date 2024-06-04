@@ -4,7 +4,7 @@ function onYouTubeIframeAPIReady() {
     document.querySelectorAll('.video-container').forEach((container, index) => {
         const videoId = container.getAttribute('data-video-id');
         const playerElement = container.querySelector('.player');
-        
+
         players[index] = new YT.Player(playerElement, {
             height: '360',
             width: '640',
