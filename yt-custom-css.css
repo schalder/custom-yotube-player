@@ -1,17 +1,27 @@
+/* Base styles for the video container */
 .video-container {
     position: relative;
     margin: auto;
     background: black;
 }
 
+/* Ensure iframe sizes are flexible */
 .video-container iframe {
-    width: auto; 
-    height: auto; 
-    max-width: 100%; 
+    width: auto;
+    height: auto;
+    max-width: 100%;
     max-height: none;
 }
 
+/* Specific styles for when data-width and data-height attributes are present */
+.video-container[data-width][data-height] {
+    width: var(--custom-width, auto) !important; /* Use the specified width */
+    height: var(--custom-height, auto) !important; /* Use the specified height */
+    max-width: none !important; /* Disable the max-width constraint */
+    max-height: none !important; /* Disable the max-height constraint */
+}
 
+/* Other styles remain unchanged */
 .video-overlay {
     position: absolute;
     top: 0;
@@ -108,5 +118,9 @@
 
     .custom-controls input[type="range"] {
         width: calc(100% - 20px);
+    }
+
+    .video-container iframe {
+        height: 230px;
     }
 }
