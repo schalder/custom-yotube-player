@@ -1,11 +1,10 @@
 .video-container {
     position: relative;
-    max-width: 912px;
-    max-height: 510px;
+    width: attr(data-width px);
+    height: attr(data-height px);
+    max-width: 100%;
     margin: auto;
     background: black;
-    --custom-width: 912px; /* Add this custom property for width */
-    --custom-height: 510px; /* Add this custom property for height */
 }
 
 .video-container iframe {
