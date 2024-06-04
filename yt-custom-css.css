@@ -1,36 +1,16 @@
 .video-container {
     position: relative;
+    max-width: 912px;
+    max-height: 510px;
     margin: auto;
     background: black;
-    width: var(--custom-width);
-    height: var(--custom-height);
+    --custom-width: 912px; /* Add this custom property for width */
+    --custom-height: 510px; /* Add this custom property for height */
 }
 
 .video-container iframe {
     width: 100%;
-    height: 100%;
-}
-
-.video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    cursor: pointer;
-    background: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#custom-play-button {
-    display: block;
-    width: 160px;
-    height: 160px;
-    background: url('https://pixellucy.com/wp-content/uploads/2021/07/wistia-play-button.png') no-repeat center center;
-    background-size: contain;
+    height: 100%; /* Set height to 100% */
 }
 
 .custom-controls {
@@ -49,16 +29,14 @@
     align-items: center;
 }
 
-/* Custom styling for the progress bar */
 .custom-controls input[type="range"]#progress {
     flex: 1;
     margin-right: 10px;
     margin-left: 10px;
-    background: #555; /* Default color for the progress bar */
+    background: #555;
     --slider-value: 0;
 }
 
-/* Played part of the progress bar colored in blue */
 .custom-controls input[type="range"]#progress::-webkit-slider-runnable-track {
     background: linear-gradient(to right, #3b5998 var(--slider-value)%, #555 var(--slider-value)%);
 }
@@ -71,7 +49,6 @@
     border-radius: 50%;
 }
 
-/* Remaining part of the progress bar colored in red */
 .custom-controls input[type="range"]#progress::-moz-range-progress {
     background-color: #FF0000;
 }
@@ -94,7 +71,6 @@
     display: none !important;
 }
 
-/* Media query for smaller screens */
 @media screen and (max-width: 640px) {
     .custom-controls {
         flex-wrap: wrap;
@@ -109,11 +85,7 @@
         width: calc(100% - 20px);
     }
 
-    .video-container {
-        width: 100%;
-    }
-
     .video-container iframe {
-        height: auto;
+        height: 230px;
     }
 }
