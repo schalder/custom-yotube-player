@@ -142,3 +142,13 @@ document.addEventListener('contextmenu', function(event) {
         event.preventDefault();
     }
 });
+
+// Dynamically set the height of video containers based on data-height attribute
+window.addEventListener('DOMContentLoaded', function() {
+    const videoContainers = document.querySelectorAll('.video-container');
+    videoContainers.forEach(container => {
+        const height = container.dataset.height;
+        container.style.height = height + 'px';
+    });
+});
+
