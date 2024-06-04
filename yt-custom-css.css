@@ -4,21 +4,15 @@
     margin: auto;
     background: black;
     display: inline-block;
+    width: var(--custom-width);
+    height: var(--custom-height);
 }
 
-/* Ensure iframe sizes are flexible */
 .video-container iframe {
     width: 100%;
     height: 100%;
 }
 
-/* Specific styles for when data-width and data-height attributes are present */
-.video-container[data-width][data-height] {
-    width: var(--custom-width, auto) !important; /* Use the specified width */
-    height: var(--custom-height, auto) !important; /* Use the specified height */
-}
-
-/* Other styles remain unchanged */
 .video-overlay {
     position: absolute;
     top: 0;
@@ -117,7 +111,11 @@
         width: calc(100% - 20px);
     }
 
+    .video-container {
+        width: 100%;
+    }
+
     .video-container iframe {
-        height: 230px;
+        height: auto;
     }
 }
