@@ -3,22 +3,19 @@
     position: relative;
     margin: auto;
     background: black;
+    display: inline-block;
 }
 
 /* Ensure iframe sizes are flexible */
 .video-container iframe {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: none;
+    width: 100%;
+    height: 100%;
 }
 
 /* Specific styles for when data-width and data-height attributes are present */
 .video-container[data-width][data-height] {
     width: var(--custom-width, auto) !important; /* Use the specified width */
     height: var(--custom-height, auto) !important; /* Use the specified height */
-    max-width: none !important; /* Disable the max-width constraint */
-    max-height: none !important; /* Disable the max-height constraint */
 }
 
 /* Other styles remain unchanged */
