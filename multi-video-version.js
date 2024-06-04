@@ -5,7 +5,7 @@ function onYouTubeIframeAPIReady() {
         const videoId = container.getAttribute('data-video-id');
         const width = container.getAttribute('data-width');
         const height = container.getAttribute('data-height');
-        
+
         // Set custom properties for width and height
         container.style.setProperty('--custom-width', `${width}px`);
         container.style.setProperty('--custom-height', `${height}px`);
@@ -34,9 +34,6 @@ function onYouTubeIframeAPIReady() {
         container.player = player;
     });
 }
-
-
-// Any other necessary code can be included here as well
 
 function onPlayerReady(event, container) {
     const player = container.player;
