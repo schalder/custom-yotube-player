@@ -1,22 +1,34 @@
 .video-container {
     position: relative;
-    width: attr(data-width px);
-    height: attr(data-height px);
+    width: 100%; /* Adjust as needed */
     max-width: 100%;
-    margin: auto;
     background: black;
+    overflow: hidden; /* Ensure the video fits within the container */
 }
 
 .video-container iframe {
     width: 100%;
-    height: 100%; /* Set height to 100% */
+    height: 100%;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    cursor: pointer;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .custom-controls {
     position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
     width: 100%;
     background: rgba(0, 0, 0, 0.7);
     padding: 10px;
@@ -26,17 +38,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: #fff; /* Set text color to white */
 }
 
-.custom-controls input[type="range"]#progress {
-    flex: 1;
-    margin-right: 10px;
-    margin-left: 10px;
+.custom-controls button {
+    background: transparent;
+    border: none;
+    color: #fff; /* Set button color to white */
+    cursor: pointer;
+}
+
+.custom-controls input[type="range"] {
+    width: 100%;
     background: #555;
-    --slider-value: 0;
+    -webkit-appearance: none;
+    margin: 0 10px;
 }
 
-.custom-controls input[type="range"]#progress::-webkit-slider-runnable-track {
+.custom-controls input[type="range"]::-webkit-slider-runnable-track {
     background: linear-gradient(to right, #3b5998 var(--slider-value)%, #555 var(--slider-value)%);
 }
 
@@ -46,45 +65,5 @@
     height: 15px;
     background: #fff;
     border-radius: 50%;
-}
-
-.custom-controls input[type="range"]#progress::-moz-range-progress {
-    background-color: #FF0000;
-}
-
-.custom-controls input[type="range"]#progress::-moz-range-track {
-    background-color: #555;
-}
-
-.custom-controls input[type="range"]#volume {
-    width: 100px;
-    margin-left: 10px;
-}
-
-#time-display {
-    color: #fff;
-    padding: 0px 8px;
-}
-
-.ytp-expand-pause-overlay .ytp-pause-overlay {
-    display: none !important;
-}
-
-@media screen and (max-width: 640px) {
-    .custom-controls {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .custom-controls button {
-        margin: 5px;
-    }
-
-    .custom-controls input[type="range"] {
-        width: calc(100% - 20px);
-    }
-
-    .video-container iframe {
-        height: 230px;
-    }
+    cursor: pointer;
 }
