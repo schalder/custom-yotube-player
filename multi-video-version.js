@@ -45,6 +45,7 @@ function onPlayerReady(index) {
         const volumeControl = container.querySelector('.volume');
         const videoOverlay = container.querySelector('.video-overlay');
         const timeDisplay = container.querySelector('.time-display');
+        const fullScreenButton = container.querySelector('.full-screen');
 
         customPlayButton.onclick = videoOverlay.onclick = function() {
             if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
