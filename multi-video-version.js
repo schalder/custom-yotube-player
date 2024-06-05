@@ -46,6 +46,21 @@ function onPlayerReady(index) {
         const videoOverlay = container.querySelector('.video-overlay');
         const timeDisplay = container.querySelector('.time-display');
         const fullScreenButton = container.querySelector('.full-screen');
+        const customControls = container.querySelector('.custom-controls');
+
+        let controlsTimeout;
+
+        const showControls = () => {
+            customControls.style.opacity = 1;
+            clearTimeout(controlsTimeout);
+            controlsTimeout = setTimeout(() => {
+                customControls.style.opacity = 0;
+            }, 2000);
+        };
+
+        const hideControls = () => {
+            customControls.style.opacity = 0;
+        };
 
         customPlayButton.onclick = videoOverlay.onclick = function() {
             if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
@@ -53,6 +68,7 @@ function onPlayerReady(index) {
             } else {
                 players[index].playVideo();
             }
+            showControls();
         };
 
         playPauseButton.onclick = function() {
@@ -61,6 +77,7 @@ function onPlayerReady(index) {
             } else {
                 players[index].playVideo();
             }
+            showControls();
         };
 
         muteUnmuteButton.onclick = function() {
@@ -71,20 +88,26 @@ function onPlayerReady(index) {
                 players[index].mute();
                 muteUnmuteButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
             }
+            showControls();
         };
 
         progressBar.oninput = function() {
             const duration = players[index].getDuration();
             const seekTo = duration * (progressBar.value / 100);
             players[index].seekTo(seekTo, true);
+            showControls();
         };
 
         volumeControl.oninput = function() {
             const volume = volumeControl.value;
             players[index].setVolume(volume);
+            showControls();
         };
 
-        fullScreenButton.addEventListener('click', () => toggleFullScreen(container));
+        fullScreenButton.addEventListener('click', () => {
+            toggleFullScreen(container);
+            showControls();
+        });
 
         function toggleFullScreen(container) {
             if (!document.fullscreenElement) {
@@ -107,13 +130,8 @@ function onPlayerReady(index) {
             timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds} / ${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
         }, 1000);
 
-        container.addEventListener('mouseover', () => {
-            container.querySelector('.custom-controls').style.opacity = 1;
-        });
-
-        container.addEventListener('mouseout', () => {
-            container.querySelector('.custom-controls').style.opacity = 0;
-        });
+        container.addEventListener('mousemove', showControls);
+        container.addEventListener('mouseleave', hideControls);
     };
 }
 
@@ -151,4 +169,3 @@ document.addEventListener('contextmenu', function(event) {
         event.preventDefault();
     }
 });
-
