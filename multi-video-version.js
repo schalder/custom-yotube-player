@@ -20,7 +20,7 @@ function onYouTubeIframeAPIReady() {
                 'controls': 0,
                 'showinfo': 0,
                 'rel': 0,
-                'modestbranding': 0,
+                'modestbranding': 1,
                 'iv_load_policy': 3,
                 'disablekb': 1,
                 'fs': 0,
