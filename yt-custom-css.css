@@ -53,9 +53,10 @@
     align-items: center;
 }
 
-.custom-controls button {
+.video-container .custom-controls button {
     cursor: pointer;
 }
+
 
 .custom-controls input[type="range"].progress {
     flex: 1;
@@ -63,7 +64,7 @@
     margin-left: 10px;
     background: #555;
     --slider-value: 0;
-    cursor: pointer;
+    
 }
 .custom-controls input[type="range"].progress::-webkit-slider-runnable-track {
     background: linear-gradient(to right, #3b5998 var(--slider-value)%, #555 var(--slider-value)%);
@@ -84,7 +85,7 @@
 .custom-controls input[type="range"].volume {
     width: 100px;
     margin-left: 10px;
-    cursor: pointer;
+    
 }
 .time-display {
     color: #fff;
