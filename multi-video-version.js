@@ -1,3 +1,19 @@
+// Attach event listener for full-screen change globally
+document.addEventListener('fullscreenchange', toggleCustomControlsVisibility);
+document.addEventListener('mozfullscreenchange', toggleCustomControlsVisibility);
+document.addEventListener('webkitfullscreenchange', toggleCustomControlsVisibility);
+document.addEventListener('msfullscreenchange', toggleCustomControlsVisibility);
+
+function toggleCustomControlsVisibility() {
+    // Loop through all video containers
+    document.querySelectorAll('.video-container').forEach((container, index) => {
+        const isFullScreen = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+        const display = isFullScreen ? 'none' : 'block';
+        container.querySelector('.custom-controls').style.display = display;
+        container.querySelector('.video-overlay').style.display = display;
+    });
+}
+
 let players = [];
 
 function onYouTubeIframeAPIReady() {
