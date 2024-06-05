@@ -46,7 +46,7 @@
 }
 
 .custom-controls {
-    position: absolute;
+    position: absolute !important;
     bottom: 0;
     left: 0;
     right: 0;
@@ -55,7 +55,7 @@
     padding: 10px;
     z-index: 1000;
     transition: opacity 0.3s;
-    opacity: 1;
+    opacity: 1 !important;
     display: flex;
     justify-content: space-between;
     align-items: center;
