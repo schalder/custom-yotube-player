@@ -47,14 +47,6 @@ function onPlayerReady(index) {
         const timeDisplay = container.querySelector('.time-display');
         const fullScreenButton = container.querySelector('.full-screen');
 
-        // Function to toggle custom controls visibility
-        function toggleCustomControlsVisibility() {
-            const isFullScreen = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
-            const display = isFullScreen ? 'none' : 'block';
-            container.querySelector('.custom-controls').style.display = display;
-            container.querySelector('.video-overlay').style.display = display;
-        }
-
         customPlayButton.onclick = videoOverlay.onclick = function() {
             if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
                 players[index].pauseVideo();
@@ -63,12 +55,6 @@ function onPlayerReady(index) {
             }
         };
         
-        // Add event listener for full-screen change
-        document.addEventListener('fullscreenchange', toggleCustomControlsVisibility);
-        document.addEventListener('mozfullscreenchange', toggleCustomControlsVisibility);
-        document.addEventListener('webkitfullscreenchange', toggleCustomControlsVisibility);
-        document.addEventListener('msfullscreenchange', toggleCustomControlsVisibility);
-
         playPauseButton.onclick = function() {
             if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
                 players[index].pauseVideo();
