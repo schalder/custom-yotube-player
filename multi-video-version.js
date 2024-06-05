@@ -51,13 +51,17 @@ function onPlayerReady(index) {
         let hideControlsTimeout;
 
         function showControls() {
-            customControls.style.opacity = 1;
+            customControls.classList.remove('hidden');
             clearTimeout(hideControlsTimeout);
-            hideControlsTimeout = setTimeout(hideControls, 4000);
+            if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
+                hideControlsTimeout = setTimeout(hideControls, 4000);
+            }
         }
 
         function hideControls() {
-            customControls.style.opacity = 0;
+            if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
+                customControls.classList.add('hidden');
+            }
         }
 
         customPlayButton.onclick = videoOverlay.onclick = function() {
@@ -141,11 +145,16 @@ function onPlayerStateChange(index) {
         const container = document.querySelectorAll('.video-container')[index];
         const customPlayButton = container.querySelector('.custom-play-button');
         const videoOverlay = container.querySelector('.video-overlay');
+        const customControls = container.querySelector('.custom-controls');
 
         if (event.data === YT.PlayerState.PLAYING) {
             customPlayButton.style.display = 'none'; // Hide custom play button when playing
+            setTimeout(() => {
+                customControls.classList.add('hidden');
+            }, 4000); // Hide controls after 4 seconds of play
         } else {
             customPlayButton.style.display = 'block'; // Show custom play button when paused or ended
+            customControls.classList.remove('hidden'); // Show controls when paused or ended
         }
 
         if (event.data === YT.PlayerState.ENDED) {
