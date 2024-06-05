@@ -46,19 +46,18 @@
 }
 
 .custom-controls {
+    opacity: 1 !important;
     position: absolute !important;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    z-index: 1000;
-    transition: opacity 0.3s;
-    opacity: 1; /* Initially hidden */
+    height: 35px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 2147483647;
+    margin: 0 auto;
     display: flex !important;
-    justify-content: space-between;
+    background: rgba(0, 0, 0, .6);
     align-items: center;
+    padding: 0px 5px;
 }
 .custom-controls.hidden {
     opacity: 0;
