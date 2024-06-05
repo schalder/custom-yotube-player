@@ -85,16 +85,15 @@ function onPlayerReady(index) {
         };
 
         fullScreenButton.addEventListener('click', () => {
-            const player = players[index];
-            const iframe = player.getIframe();
-            if (iframe.requestFullscreen) {
-                iframe.requestFullscreen();
-            } else if (iframe.mozRequestFullScreen) { /* Firefox */
-                iframe.mozRequestFullScreen();
-            } else if (iframe.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-                iframe.webkitRequestFullscreen();
-            } else if (iframe.msRequestFullscreen) { /* IE/Edge */
-                iframe.msRequestFullscreen();
+            const playerElement = container.querySelector('.player');
+            if (playerElement.requestFullscreen) {
+                playerElement.requestFullscreen();
+            } else if (playerElement.mozRequestFullScreen) { /* Firefox */
+                playerElement.mozRequestFullScreen();
+            } else if (playerElement.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                playerElement.webkitRequestFullscreen();
+            } else if (playerElement.msRequestFullscreen) { /* IE/Edge */
+                playerElement.msRequestFullscreen();
             }
         });
 
