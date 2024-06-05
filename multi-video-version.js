@@ -54,7 +54,7 @@ function onPlayerReady(index) {
                 players[index].playVideo();
             }
         };
-        
+
         playPauseButton.onclick = function() {
             if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
                 players[index].pauseVideo();
@@ -84,31 +84,14 @@ function onPlayerReady(index) {
             players[index].setVolume(volume);
         };
 
-        fullScreenButton.addEventListener('click', () => {
-            const playerElement = container; // Request full-screen mode for the container
-            if (document.fullscreenElement) {
+        fullScreenButton.addEventListener('click', () => toggleFullScreen(container));
+
+        function toggleFullScreen(container) {
+            if (!document.fullscreenElement) {
+                container.requestFullscreen();
+            } else {
                 document.exitFullscreen();
-            } else if (playerElement.requestFullscreen) {
-                playerElement.requestFullscreen();
-            } else if (playerElement.mozRequestFullScreen) { /* Firefox */
-                playerElement.mozRequestFullScreen();
-            } else if (playerElement.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-                playerElement.webkitRequestFullscreen();
-            } else if (playerElement.msRequestFullscreen) { /* IE/Edge */
-                playerElement.msRequestFullscreen();
             }
-        });
-
-        document.addEventListener('fullscreenchange', () => toggleCustomControlsVisibility(container));
-        document.addEventListener('mozfullscreenchange', () => toggleCustomControlsVisibility(container));
-        document.addEventListener('webkitfullscreenchange', () => toggleCustomControlsVisibility(container));
-        document.addEventListener('msfullscreenchange', () => toggleCustomControlsVisibility(container));
-
-        function toggleCustomControlsVisibility(container) {
-            const isFullScreen = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
-            const display = isFullScreen ? 'block' : 'block';
-            container.querySelector('.custom-controls').style.display = display;
-            container.querySelector('.video-overlay').style.display = display;
         }
 
         setInterval(() => {
@@ -142,22 +125,30 @@ function onPlayerStateChange(index) {
         const videoOverlay = container.querySelector('.video-overlay');
 
         if (event.data === YT.PlayerState.PLAYING) {
-            customPlayButton.style.display = 'none';
+            customPlayButton.style.display = 'none'; // Hide custom play button when playing
         } else {
-            customPlayButton.style.display = 'block';
+            customPlayButton.style.display = 'block'; // Show custom play button when paused or ended
         }
 
-        if (event.data === YT.PlayerState.ENDED || event.data === YT.PlayerState.PAUSED) {
+        if (event.data === YT.PlayerState.ENDED) {
+            customPlayButton.style.display = 'block'; // Show custom play button when video ends
             videoOverlay.style.background = `url('https://img.youtube.com/vi/${container.getAttribute('data-video-id')}/maxresdefault.jpg') no-repeat center center`;
             videoOverlay.style.backgroundSize = 'cover';
         } else {
-            videoOverlay.style.background = 'transparent';
+            videoOverlay.style.background = 'transparent'; // Remove background when not ended
+        }
+
+        if (event.data === YT.PlayerState.PAUSED) {
+            videoOverlay.style.background = `url('https://img.youtube.com/vi/${container.getAttribute('data-video-id')}/maxresdefault.jpg') no-repeat center center`;
+            videoOverlay.style.backgroundSize = 'cover';
         }
     };
 }
 
+// Disable right-click context menu on the iframe
 document.addEventListener('contextmenu', function(event) {
     if (event.target.nodeName === 'IFRAME') {
         event.preventDefault();
     }
 });
+
