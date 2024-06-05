@@ -15,7 +15,7 @@
 
 .video-container iframe {
     width: 100%;
-    height: 100%;
+    height: 510px;
 }
 
 .video-overlay {
@@ -73,11 +73,9 @@
     --slider-value: 0;
     cursor: pointer;
 }
-
 .custom-controls input[type="range"].progress::-webkit-slider-runnable-track {
     background: linear-gradient(to right, #3b5998 var(--slider-value)%, #555 var(--slider-value)%);
 }
-
 .custom-controls input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 15px;
@@ -85,42 +83,40 @@
     background: #fff;
     border-radius: 50%;
 }
-
 .custom-controls input[type="range"].progress::-moz-range-progress {
     background-color: #FF0000;
 }
-
 .custom-controls input[type="range"].progress::-moz-range-track {
     background-color: #555;
 }
-
 .custom-controls input[type="range"].volume {
-width: 100px;
-margin-left: 10px;
-cursor: pointer;
+    width: 100px;
+    margin-left: 10px;
+    cursor: pointer;
 }
 
 .time-display {
-color: #fff;
-padding: 0px 8px;
+    color: #fff;
+    padding: 0px 8px;
 }
 
 .ytp-expand-pause-overlay .ytp-pause-overlay {
-display: none !important;
+    display: none !important;
 }
 
 @media screen and (max-width: 640px) {
-.custom-controls {
-flex-wrap: wrap;
-justify-content: center;
+    .custom-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .custom-controls button {
+        margin: 5px;
+    }
+    .custom-controls input[type="range"] {
+        width: calc(100% - 20px);
+    }
+    .video-container iframe {
+        height: 230px;
+    }
 }
-.custom-controls button {
-margin: 5px;
-}
-.custom-controls input[type="range"] {
-width: calc(100% - 20px);
-}
-.video-container iframe {
-height: 230px;
-}
-}
+
