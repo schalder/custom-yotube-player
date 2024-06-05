@@ -1,41 +1,15 @@
-// Initialize an array to store YouTube players
 let players = [];
 
-// Function to toggle the visibility of custom controls and video overlay
-function toggleCustomControlsVisibility() {
-    // Loop through all video containers
-    document.querySelectorAll('.video-container').forEach((container, index) => {
-        // Check if the document is in full-screen mode
-        const isFullScreen = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
-        // Set display style based on full-screen mode
-        const display = isFullScreen ? 'none' : 'block';
-        // Update the display style of custom controls and video overlay
-        container.querySelector('.custom-controls').style.display = display;
-        container.querySelector('.video-overlay').style.display = display;
-    });
-}
-
-// Attach event listener for full-screen change globally
-document.addEventListener('fullscreenchange', toggleCustomControlsVisibility);
-document.addEventListener('mozfullscreenchange', toggleCustomControlsVisibility);
-document.addEventListener('webkitfullscreenchange', toggleCustomControlsVisibility);
-document.addEventListener('msfullscreenchange', toggleCustomControlsVisibility);
-
-// Function called when YouTube Iframe API is ready
 function onYouTubeIframeAPIReady() {
     console.log("YouTube Iframe API is ready.");
-    // Loop through all video containers
     document.querySelectorAll('.video-container').forEach((container, index) => {
-        // Get the video ID, player element, width, and height from container attributes
         const videoId = container.getAttribute('data-video-id');
         const playerElement = container.querySelector('.player');
         const width = container.getAttribute('data-width') || '100%';
         const height = container.getAttribute('data-height') || '100%';
 
-        // Log player initialization information
         console.log(`Initializing player ${index} with video ID ${videoId}, width ${width}, height ${height}`);
 
-        // Initialize YouTube player
         players[index] = new YT.Player(playerElement, {
             height: height,
             width: width,
@@ -71,6 +45,7 @@ function onPlayerReady(index) {
         const volumeControl = container.querySelector('.volume');
         const videoOverlay = container.querySelector('.video-overlay');
         const timeDisplay = container.querySelector('.time-display');
+        const fullScreenButton = container.querySelector('.full-screen');
 
         customPlayButton.onclick = videoOverlay.onclick = function() {
             if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
@@ -108,7 +83,31 @@ function onPlayerReady(index) {
             const volume = volumeControl.value;
             players[index].setVolume(volume);
         };
- 
+
+        fullScreenButton.addEventListener('click', () => {
+            const playerElement = container; // Request full-screen mode for the container
+            if (playerElement.requestFullscreen) {
+                playerElement.requestFullscreen();
+            } else if (playerElement.mozRequestFullScreen) { /* Firefox */
+                playerElement.mozRequestFullScreen();
+            } else if (playerElement.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                playerElement.webkitRequestFullscreen();
+            } else if (playerElement.msRequestFullscreen) { /* IE/Edge */
+                playerElement.msRequestFullscreen();
+            }
+        });
+
+        document.addEventListener('fullscreenchange', toggleCustomControlsVisibility);
+        document.addEventListener('mozfullscreenchange', toggleCustomControlsVisibility);
+        document.addEventListener('webkitfullscreenchange', toggleCustomControlsVisibility);
+        document.addEventListener('msfullscreenchange', toggleCustomControlsVisibility);
+
+        function toggleCustomControlsVisibility() {
+            const isFullScreen = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+            const display = isFullScreen ? 'block' : 'block';
+            container.querySelector('.custom-controls').style.display = display;
+            container.querySelector('.video-overlay').style.display = display;
+        }
 
         setInterval(() => {
             const currentTime = players[index].getCurrentTime();
@@ -133,7 +132,6 @@ function onPlayerReady(index) {
     };
 }
 
-
 function onPlayerStateChange(index) {
     return function(event) {
         console.log(`Player ${index} state changed to ${event.data}.`);
@@ -142,31 +140,22 @@ function onPlayerStateChange(index) {
         const videoOverlay = container.querySelector('.video-overlay');
 
         if (event.data === YT.PlayerState.PLAYING) {
-            customPlayButton.style.display = 'none'; // Hide custom play button when playing
+            customPlayButton.style.display = 'none';
         } else {
-            customPlayButton.style.display = 'block'; // Show custom play button when paused or ended
+            customPlayButton.style.display = 'block';
         }
 
-        if (event.data === YT.PlayerState.ENDED) {
-            customPlayButton.style.display = 'block'; // Show custom play button when video ends
+        if (event.data === YT.PlayerState.ENDED || event.data === YT.PlayerState.PAUSED) {
             videoOverlay.style.background = `url('https://img.youtube.com/vi/${container.getAttribute('data-video-id')}/maxresdefault.jpg') no-repeat center center`;
             videoOverlay.style.backgroundSize = 'cover';
         } else {
-            videoOverlay.style.background = 'transparent'; // Remove background when not ended
+            videoOverlay.style.background = 'transparent';
         }
-
-        if (event.data === YT.PlayerState.PAUSED) {
-            videoOverlay.style.background = `url('https://img.youtube.com/vi/${container.getAttribute('data-video-id')}/maxresdefault.jpg') no-repeat center center`;
-videoOverlay.style.backgroundSize = 'cover';
-}
-};
+    };
 }
 
-// Disable right-click context menu on the iframe
 document.addEventListener('contextmenu', function(event) {
-if (event.target.nodeName === 'IFRAME') {
-event.preventDefault();
-}
+    if (event.target.nodeName === 'IFRAME') {
+        event.preventDefault();
+    }
 });
-
-
