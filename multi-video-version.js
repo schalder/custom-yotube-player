@@ -1,4 +1,14 @@
 let players = [];
+function toggleCustomControlsVisibility() {
+    // Loop through all video containers
+    document.querySelectorAll('.video-container').forEach((container, index) => {
+        const isFullScreen = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+        const display = isFullScreen ? 'none' : 'block';
+        container.querySelector('.custom-controls').style.display = display;
+        container.querySelector('.video-overlay').style.display = display;
+    });
+}
+
 
 function onYouTubeIframeAPIReady() {
     console.log("YouTube Iframe API is ready.");
