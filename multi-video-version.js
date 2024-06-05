@@ -86,7 +86,9 @@ function onPlayerReady(index) {
 
         fullScreenButton.addEventListener('click', () => {
             const playerElement = container; // Request full-screen mode for the container
-            if (playerElement.requestFullscreen) {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else if (playerElement.requestFullscreen) {
                 playerElement.requestFullscreen();
             } else if (playerElement.mozRequestFullScreen) { /* Firefox */
                 playerElement.mozRequestFullScreen();
@@ -97,12 +99,12 @@ function onPlayerReady(index) {
             }
         });
 
-        document.addEventListener('fullscreenchange', toggleCustomControlsVisibility);
-        document.addEventListener('mozfullscreenchange', toggleCustomControlsVisibility);
-        document.addEventListener('webkitfullscreenchange', toggleCustomControlsVisibility);
-        document.addEventListener('msfullscreenchange', toggleCustomControlsVisibility);
+        document.addEventListener('fullscreenchange', () => toggleCustomControlsVisibility(container));
+        document.addEventListener('mozfullscreenchange', () => toggleCustomControlsVisibility(container));
+        document.addEventListener('webkitfullscreenchange', () => toggleCustomControlsVisibility(container));
+        document.addEventListener('msfullscreenchange', () => toggleCustomControlsVisibility(container));
 
-        function toggleCustomControlsVisibility() {
+        function toggleCustomControlsVisibility(container) {
             const isFullScreen = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
             const display = isFullScreen ? 'block' : 'block';
             container.querySelector('.custom-controls').style.display = display;
