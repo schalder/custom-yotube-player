@@ -71,7 +71,6 @@ function onPlayerReady(index) {
         const volumeControl = container.querySelector('.volume');
         const videoOverlay = container.querySelector('.video-overlay');
         const timeDisplay = container.querySelector('.time-display');
-        const fullScreenButton = container.querySelector('.full-screen');
 
         customPlayButton.onclick = videoOverlay.onclick = function() {
             if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
@@ -109,21 +108,7 @@ function onPlayerReady(index) {
             const volume = volumeControl.value;
             players[index].setVolume(volume);
         };
-
-     fullScreenButton.addEventListener('click', () => {
-    const playerElement = document.documentElement; // Request full-screen mode for the entire document
-    if (playerElement.requestFullscreen) {
-        playerElement.requestFullscreen();
-    } else if (playerElement.mozRequestFullScreen) { /* Firefox */
-        playerElement.mozRequestFullScreen();
-    } else if (playerElement.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-        playerElement.webkitRequestFullscreen();
-    } else if (playerElement.msRequestFullscreen) { /* IE/Edge */
-        playerElement.msRequestFullscreen();
-    }
-});
-
-        
+ 
 
         setInterval(() => {
             const currentTime = players[index].getCurrentTime();
