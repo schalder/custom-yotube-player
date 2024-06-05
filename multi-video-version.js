@@ -132,7 +132,6 @@ function onPlayerReady(index) {
 
         container.addEventListener('mousemove', showControls);
         container.addEventListener('mouseleave', hideControls);
-        showControls();
     };
 }
 
