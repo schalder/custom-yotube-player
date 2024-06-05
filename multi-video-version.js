@@ -1,25 +1,41 @@
+// Initialize an array to store YouTube players
 let players = [];
+
+// Function to toggle the visibility of custom controls and video overlay
 function toggleCustomControlsVisibility() {
     // Loop through all video containers
     document.querySelectorAll('.video-container').forEach((container, index) => {
+        // Check if the document is in full-screen mode
         const isFullScreen = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+        // Set display style based on full-screen mode
         const display = isFullScreen ? 'none' : 'block';
+        // Update the display style of custom controls and video overlay
         container.querySelector('.custom-controls').style.display = display;
         container.querySelector('.video-overlay').style.display = display;
     });
 }
 
+// Attach event listener for full-screen change globally
+document.addEventListener('fullscreenchange', toggleCustomControlsVisibility);
+document.addEventListener('mozfullscreenchange', toggleCustomControlsVisibility);
+document.addEventListener('webkitfullscreenchange', toggleCustomControlsVisibility);
+document.addEventListener('msfullscreenchange', toggleCustomControlsVisibility);
 
+// Function called when YouTube Iframe API is ready
 function onYouTubeIframeAPIReady() {
     console.log("YouTube Iframe API is ready.");
+    // Loop through all video containers
     document.querySelectorAll('.video-container').forEach((container, index) => {
+        // Get the video ID, player element, width, and height from container attributes
         const videoId = container.getAttribute('data-video-id');
         const playerElement = container.querySelector('.player');
         const width = container.getAttribute('data-width') || '100%';
         const height = container.getAttribute('data-height') || '100%';
 
+        // Log player initialization information
         console.log(`Initializing player ${index} with video ID ${videoId}, width ${width}, height ${height}`);
 
+        // Initialize YouTube player
         players[index] = new YT.Player(playerElement, {
             height: height,
             width: width,
