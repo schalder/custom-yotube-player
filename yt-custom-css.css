@@ -17,6 +17,7 @@
     width: 100%;
     height: 510px;
 }
+
 .video-overlay {
     position: absolute;
     top: 0;
@@ -29,14 +30,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.3s ease; /* Add transition for smooth change */
 }
+
 .custom-play-button {
     display: block;
     width: 160px;
     height: 160px;
     background: url('https://pixellucy.com/wp-content/uploads/2021/07/wistia-play-button.png') no-repeat center center;
     background-size: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+
 .custom-controls {
     position: absolute;
     bottom: 0;
@@ -64,7 +72,6 @@
     background: #555;
     --slider-value: 0;
     cursor: pointer;
-    
 }
 .custom-controls input[type="range"].progress::-webkit-slider-runnable-track {
     background: linear-gradient(to right, #3b5998 var(--slider-value)%, #555 var(--slider-value)%);
@@ -86,15 +93,16 @@
     width: 100px;
     margin-left: 10px;
     cursor: pointer;
-    
 }
 .time-display {
     color: #fff;
     padding: 0px 8px;
 }
+
 .ytp-expand-pause-overlay .ytp-pause-overlay {
     display: none !important;
 }
+
 @media screen and (max-width: 640px) {
     .custom-controls {
         flex-wrap: wrap;
