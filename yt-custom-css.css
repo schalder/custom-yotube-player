@@ -46,8 +46,8 @@
 }
 
 .custom-controls {
-    opacity: 1 !important;
     position: absolute !important;
+    opacity: 1; /* Initially hidden */
     height: 35px;
     bottom: 0px;
     left: 0px;
