@@ -121,6 +121,7 @@ function onPlayerReady(index) {
     };
 }
 
+
 function onPlayerStateChange(index) {
     return function(event) {
         console.log(`Player ${index} state changed to ${event.data}.`);
