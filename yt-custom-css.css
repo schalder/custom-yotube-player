@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     padding-top: 55.25%; /* 16:9 Aspect Ratio */
-    background: black;
+    background: rgba(255,255,255,0);
 }
 
 .video-container .player {
@@ -50,7 +50,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    width: 97%;
+    width: 100%;
     background: rgba(0, 0, 0, 0.7);
     padding: 10px;
     z-index: 1000;
