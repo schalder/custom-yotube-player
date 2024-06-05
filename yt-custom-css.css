@@ -55,7 +55,7 @@
     padding: 10px;
     z-index: 1000;
     transition: opacity 0.3s;
-    opacity: 0; /* Initially hidden */
+    opacity: 1 !important; /* Initially visible */
     display: flex !important;
     justify-content: space-between;
     align-items: center;
