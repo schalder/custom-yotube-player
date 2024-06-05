@@ -54,12 +54,10 @@
 }
 
 .video-container .custom-controls button,
-.custom-controls input[type="range"].progress,
-.custom-controls input[type="range"].volume {
+.custom-controls .progress,
+.custom-controls .volume {
     cursor: pointer;
 }
-
-
 
 .custom-controls input[type="range"].progress {
     flex: 1;
