@@ -48,20 +48,17 @@ function onPlayerReady(index) {
         const fullScreenButton = container.querySelector('.full-screen');
         const customControls = container.querySelector('.custom-controls');
 
-        let controlsTimeout;
+        let hideControlsTimeout;
 
-        const showControls = () => {
+        function showControls() {
             customControls.style.opacity = 1;
-            clearTimeout(controlsTimeout);
-            controlsTimeout = setTimeout(() => {
-                customControls.style.opacity = 0;
-            }, 2000);
-        };
+            clearTimeout(hideControlsTimeout);
+            hideControlsTimeout = setTimeout(hideControls, 2000);
+        }
 
-        const hideControls = () => {
-            clearTimeout(controlsTimeout);
+        function hideControls() {
             customControls.style.opacity = 0;
-        };
+        }
 
         customPlayButton.onclick = videoOverlay.onclick = function() {
             if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
@@ -69,7 +66,6 @@ function onPlayerReady(index) {
             } else {
                 players[index].playVideo();
             }
-            showControls();
         };
 
         playPauseButton.onclick = function() {
@@ -78,7 +74,6 @@ function onPlayerReady(index) {
             } else {
                 players[index].playVideo();
             }
-            showControls();
         };
 
         muteUnmuteButton.onclick = function() {
@@ -89,26 +84,20 @@ function onPlayerReady(index) {
                 players[index].mute();
                 muteUnmuteButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
             }
-            showControls();
         };
 
         progressBar.oninput = function() {
             const duration = players[index].getDuration();
             const seekTo = duration * (progressBar.value / 100);
             players[index].seekTo(seekTo, true);
-            showControls();
         };
 
         volumeControl.oninput = function() {
             const volume = volumeControl.value;
             players[index].setVolume(volume);
-            showControls();
         };
 
-        fullScreenButton.addEventListener('click', () => {
-            toggleFullScreen(container);
-            showControls();
-        });
+        fullScreenButton.addEventListener('click', () => toggleFullScreen(container));
 
         function toggleFullScreen(container) {
             if (!document.fullscreenElement) {
@@ -131,13 +120,18 @@ function onPlayerReady(index) {
             timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds} / ${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
         }, 1000);
 
-        container.addEventListener('mousemove', showControls);
-        container.addEventListener('mouseleave', hideControls);
-        container.addEventListener('touchstart', showControls);
-        container.addEventListener('touchend', hideControls);
+        container.addEventListener('mouseover', showControls);
+        container.addEventListener('mouseout', () => {
+            hideControlsTimeout = setTimeout(hideControls, 2000);
+        });
 
-        // Show controls initially
-        showControls();
+        container.addEventListener('touchstart', showControls);
+        container.addEventListener('touchend', () => {
+            hideControlsTimeout = setTimeout(hideControls, 2000);
+        });
+
+        // Initially hide controls after 2 seconds
+        hideControlsTimeout = setTimeout(hideControls, 2000);
     };
 }
 
