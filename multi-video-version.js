@@ -53,7 +53,7 @@ function onPlayerReady(index) {
         function showControls() {
             customControls.style.opacity = 1;
             clearTimeout(hideControlsTimeout);
-            hideControlsTimeout = setTimeout(hideControls, 2000);
+            hideControlsTimeout = setTimeout(hideControls, 4000);
         }
 
         function hideControls() {
@@ -122,16 +122,16 @@ function onPlayerReady(index) {
 
         container.addEventListener('mouseover', showControls);
         container.addEventListener('mouseout', () => {
-            hideControlsTimeout = setTimeout(hideControls, 2000);
+            hideControlsTimeout = setTimeout(hideControls, 4000);
         });
 
         container.addEventListener('touchstart', showControls);
         container.addEventListener('touchend', () => {
-            hideControlsTimeout = setTimeout(hideControls, 2000);
+            hideControlsTimeout = setTimeout(hideControls, 4000);
         });
 
         // Initially hide controls after 2 seconds
-        hideControlsTimeout = setTimeout(hideControls, 2000);
+        hideControlsTimeout = setTimeout(hideControls, 4000);
     };
 }
 
