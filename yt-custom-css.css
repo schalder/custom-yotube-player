@@ -53,9 +53,12 @@
     align-items: center;
 }
 
-.video-container .custom-controls button {
+.video-container .custom-controls button,
+.custom-controls input[type="range"].progress,
+.custom-controls input[type="range"].volume {
     cursor: pointer;
 }
+
 
 
 .custom-controls input[type="range"].progress {
