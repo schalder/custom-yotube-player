@@ -1,19 +1,3 @@
-// Attach event listener for full-screen change globally
-document.addEventListener('fullscreenchange', toggleCustomControlsVisibility);
-document.addEventListener('mozfullscreenchange', toggleCustomControlsVisibility);
-document.addEventListener('webkitfullscreenchange', toggleCustomControlsVisibility);
-document.addEventListener('msfullscreenchange', toggleCustomControlsVisibility);
-
-function toggleCustomControlsVisibility() {
-    // Loop through all video containers
-    document.querySelectorAll('.video-container').forEach((container, index) => {
-        const isFullScreen = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
-        const display = isFullScreen ? 'none' : 'block';
-        container.querySelector('.custom-controls').style.display = display;
-        container.querySelector('.video-overlay').style.display = display;
-    });
-}
-
 let players = [];
 
 function onYouTubeIframeAPIReady() {
@@ -160,15 +144,16 @@ function onPlayerStateChange(index) {
 
         if (event.data === YT.PlayerState.PAUSED) {
             videoOverlay.style.background = `url('https://img.youtube.com/vi/${container.getAttribute('data-video-id')}/maxresdefault.jpg') no-repeat center center`;
-            videoOverlay.style.backgroundSize = 'cover';
-        }
-    };
+videoOverlay.style.backgroundSize = 'cover';
 }
-
+};
+}
 
 // Disable right-click context menu on the iframe
 document.addEventListener('contextmenu', function(event) {
-    if (event.target.nodeName === 'IFRAME') {
-        event.preventDefault();
-    }
+if (event.target.nodeName === 'IFRAME') {
+event.preventDefault();
+}
 });
+
+
