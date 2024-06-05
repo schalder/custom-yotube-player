@@ -133,6 +133,10 @@ function onPlayerReady(index) {
         container.addEventListener('mousemove', showControls);
         container.addEventListener('mouseleave', hideControls);
         container.addEventListener('touchstart', showControls);
+        container.addEventListener('touchend', hideControls);
+
+        // Show controls initially
+        showControls();
     };
 }
 
