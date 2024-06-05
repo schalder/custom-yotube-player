@@ -84,18 +84,20 @@ function onPlayerReady(index) {
             players[index].setVolume(volume);
         };
 
-        fullScreenButton.addEventListener('click', () => {
-            const playerElement = container.querySelector('.player');
-            if (playerElement.requestFullscreen) {
-                playerElement.requestFullscreen();
-            } else if (playerElement.mozRequestFullScreen) { /* Firefox */
-                playerElement.mozRequestFullScreen();
-            } else if (playerElement.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-                playerElement.webkitRequestFullscreen();
-            } else if (playerElement.msRequestFullscreen) { /* IE/Edge */
-                playerElement.msRequestFullscreen();
-            }
-        });
+     fullScreenButton.addEventListener('click', () => {
+    const playerElement = document.documentElement; // Request full-screen mode for the entire document
+    if (playerElement.requestFullscreen) {
+        playerElement.requestFullscreen();
+    } else if (playerElement.mozRequestFullScreen) { /* Firefox */
+        playerElement.mozRequestFullScreen();
+    } else if (playerElement.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        playerElement.webkitRequestFullscreen();
+    } else if (playerElement.msRequestFullscreen) { /* IE/Edge */
+        playerElement.msRequestFullscreen();
+    }
+});
+
+        
 
         setInterval(() => {
             const currentTime = players[index].getCurrentTime();
