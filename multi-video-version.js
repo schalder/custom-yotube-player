@@ -59,6 +59,7 @@ function onPlayerReady(index) {
         };
 
         const hideControls = () => {
+            clearTimeout(controlsTimeout);
             customControls.style.opacity = 0;
         };
 
