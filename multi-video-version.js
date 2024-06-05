@@ -83,6 +83,20 @@ function onPlayerReady(index) {
             players[index].setVolume(volume);
         };
 
+        fullScreenButton.addEventListener('click', () => {
+            const player = players[index];
+            const iframe = player.getIframe();
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) { /* Firefox */
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) { /* IE/Edge */
+                iframe.msRequestFullscreen();
+            }
+        });
+
         setInterval(() => {
             const currentTime = players[index].getCurrentTime();
             const duration = players[index].getDuration();
