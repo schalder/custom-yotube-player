@@ -117,28 +117,23 @@ function onPlayerReady(index) {
 
         setInterval(() => {
             const currentTime = players[index].getCurrentTime();
-            const duration = players[index].getDuration();
-            progressBar.value = (currentTime / duration) * 100;
-
             const minutes = Math.floor(currentTime / 60);
             const seconds = Math.floor(currentTime % 60);
-            const totalMinutes = Math.floor(duration / 60);
-            const totalSeconds = Math.floor(duration % 60);
-            timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds} / ${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
+            timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         }, 1000);
 
         container.addEventListener('mouseover', showControls);
         container.addEventListener('mouseout', () => {
-            hideControlsTimeout = setTimeout(hideControls, 6000);
+            hideControlsTimeout = setTimeout(hideControls, 4000);
         });
 
         container.addEventListener('touchstart', showControls);
         container.addEventListener('touchend', () => {
-            hideControlsTimeout = setTimeout(hideControls, 6000);
+            hideControlsTimeout = setTimeout(hideControls, 4000);
         });
 
         // Initially hide controls after 4 seconds
-        hideControlsTimeout = setTimeout(hideControls, 6000);
+        hideControlsTimeout = setTimeout(hideControls, 4000);
     };
 }
 
