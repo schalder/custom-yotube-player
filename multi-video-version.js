@@ -40,6 +40,7 @@ function onPlayerReady(index) {
         console.log(`Player ${index} is ready.`);
         const container = document.querySelectorAll('.video-container')[index];
         const customControls = container.querySelector('.custom-controls');
+        const customPlayButton = container.querySelector('.custom-play-button');
 
         function showControls() {
             customControls.classList.remove('hidden');
@@ -79,8 +80,18 @@ function onPlayerReady(index) {
 
         // Initially hide controls after 4 seconds
         hideControlsTimeout = setTimeout(hideControls, 4000);
+
+        // Play button click event
+        customPlayButton.addEventListener('click', function() {
+            if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
+                players[index].pauseVideo();
+            } else {
+                players[index].playVideo();
+            }
+        });
     };
 }
+
 
 function onPlayerStateChange(index) {
     return function(event) {
