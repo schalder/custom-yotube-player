@@ -98,8 +98,24 @@
 }
 .custom-controls input[type="range"].volume {
     width: 100px;
+    height: 5px;
     margin-left: 10px;
     cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.custom-controls input[type="range"].volume.show {
+    opacity: 1;
+}
+
+.custom-controls input[type="range"].volume.vertical {
+    width: 5px;
+    height: 100px;
+    position: absolute;
+    bottom: 40px;
+    left: 10px;
+    transform: rotate(-90deg);
 }
 
 .time-display {
