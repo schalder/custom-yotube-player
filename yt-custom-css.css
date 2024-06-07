@@ -65,6 +65,11 @@
 
 .video-container .custom-controls button {
     cursor: pointer;
+    background: black; /* Black background for buttons */
+    color: white; /* White icon color */
+    border: none; /* Remove default button border */
+    padding: 5px; /* Add padding for larger clickable area */
+    border-radius: 3px; /* Slightly round corners */
 }
 
 .custom-controls input[type="range"].progress {
@@ -110,15 +115,20 @@
     .custom-controls {
         flex-wrap: wrap;
         justify-content: center;
+        height: auto; /* Adjust height for multiple lines */
+        padding: 5px; /* Add padding to ensure spacing */
     }
     .custom-controls button {
         margin: 5px;
+        flex: 1 1 45px; /* Allow buttons to wrap and resize */
+        text-align: center;
     }
-    .custom-controls input[type="range"] {
+    .custom-controls input[type="range"].progress,
+    .custom-controls input[type="range"].volume {
         width: calc(100% - 20px);
+        margin: 5px 0;
     }
     .video-container iframe {
         height: 230px;
     }
 }
-
