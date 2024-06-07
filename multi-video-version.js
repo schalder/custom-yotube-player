@@ -115,13 +115,12 @@ function onPlayerReady(index) {
             }
         }
 
-      setInterval(() => {
-    const currentTime = players[index].getCurrentTime();
-    const minutes = Math.floor(currentTime / 60);
-    const seconds = Math.floor(currentTime % 60);
-    timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-}, 1000);
-
+        setInterval(() => {
+            const currentTime = players[index].getCurrentTime();
+            const minutes = Math.floor(currentTime / 60);
+            const seconds = Math.floor(currentTime % 60);
+            timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }, 1000);
 
         container.addEventListener('mouseover', showControls);
         container.addEventListener('mouseout', () => {
