@@ -124,16 +124,16 @@ function onPlayerReady(index) {
 
         container.addEventListener('mouseover', showControls);
         container.addEventListener('mouseout', () => {
-            hideControlsTimeout = setTimeout(hideControls, 4000);
+            hideControlsTimeout = setTimeout(hideControls, 6000);
         });
 
         container.addEventListener('touchstart', showControls);
         container.addEventListener('touchend', () => {
-            hideControlsTimeout = setTimeout(hideControls, 4000);
+            hideControlsTimeout = setTimeout(hideControls, 6000);
         });
 
         // Initially hide controls after 4 seconds
-        hideControlsTimeout = setTimeout(hideControls, 4000);
+        hideControlsTimeout = setTimeout(hideControls, 6000);
     };
 }
 
