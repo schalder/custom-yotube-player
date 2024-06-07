@@ -122,12 +122,23 @@ function onPlayerReady(index) {
             timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         }, 1000);
 
-        container.addEventListener('mouseover', showControls);
-        container.addEventListener('mouseout', () => {
+        // Change mouseout event to mouseleave on the container
+        container.addEventListener('mouseleave', () => {
             hideControlsTimeout = setTimeout(hideControls, 6000);
         });
 
-        container.addEventListener('touchstart', showControls);
+        // Change mouseover event to mouseenter on the container
+        container.addEventListener('mouseenter', () => {
+            clearTimeout(hideControlsTimeout);
+            showControls();
+        });
+
+        // Touch events
+        container.addEventListener('touchstart', () => {
+            clearTimeout(hideControlsTimeout);
+            showControls();
+        });
+
         container.addEventListener('touchend', () => {
             hideControlsTimeout = setTimeout(hideControls, 6000);
         });
