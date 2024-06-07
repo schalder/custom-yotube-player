@@ -186,7 +186,21 @@ document.querySelectorAll('.mute-unmute').forEach(button => {
         volumeControl.classList.add('show');
     });
     button.addEventListener('mouseout', () => {
-        const volumeControl = button.parentElement.querySelector('.volume');
-        volumeControl.classList.remove('show');
+        setTimeout(() => {
+            const volumeControl = button.parentElement.querySelector('.volume');
+            volumeControl.classList.remove('show');
+        }, 1000); // Delay to prevent immediate hiding
+    });
+});
+
+// Prevent volume control from hiding when hovered
+document.querySelectorAll('.volume').forEach(slider => {
+    slider.addEventListener('mouseover', () => {
+        slider.classList.add('show');
+    });
+    slider.addEventListener('mouseout', () => {
+        setTimeout(() => {
+            slider.classList.remove('show');
+        }, 1000); // Delay to prevent immediate hiding
     });
 });
