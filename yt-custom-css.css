@@ -122,6 +122,22 @@
     visibility: hidden;
 }
 
+.custom-controls .volume {
+    display: none;
+    position: absolute;
+    right: 50px; /* Adjust this to position the slider correctly */
+    bottom: 40px; /* Adjust this to position the slider correctly */
+    width: 5px;
+    height: 100px;
+    transform: rotate(-90deg); /* Rotate to make it vertical */
+    transform-origin: center;
+}
+
+.custom-controls .volume.show {
+    display: block;
+}
+
+
 .custom-controls input[type="range"].volume.show {
     opacity: 1;
     visibility: visible;
