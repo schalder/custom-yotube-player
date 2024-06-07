@@ -67,8 +67,10 @@ function onPlayerReady(index) {
         customPlayButton.onclick = videoOverlay.onclick = function() {
             if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
                 players[index].pauseVideo();
+                playPauseButton.innerHTML = '<i class="fa-solid fa-play"></i>';
             } else {
                 players[index].playVideo();
+                playPauseButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
             }
         };
 
@@ -120,7 +122,9 @@ function onPlayerReady(index) {
 
             const minutes = Math.floor(currentTime / 60);
             const seconds = Math.floor(currentTime % 60);
-            timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            const totalMinutes = Math.floor(duration / 60);
+            const totalSeconds = Math.floor(duration % 60);
+            timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds} / ${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
         }, 1000);
 
         container.addEventListener('mouseover', showControls);
@@ -133,7 +137,7 @@ function onPlayerReady(index) {
             hideControlsTimeout = setTimeout(hideControls, 4000);
         });
 
-        // Initially hide controls after 2 seconds
+        // Initially hide controls after 4 seconds
         hideControlsTimeout = setTimeout(hideControls, 4000);
     };
 }
