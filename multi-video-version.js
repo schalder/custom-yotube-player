@@ -132,7 +132,7 @@ function onPlayerReady(index) {
             hideControlsTimeout = setTimeout(hideControls, 6000);
         });
 
-        // Initially hide controls after 4 seconds
+        // Initially hide controls after 6 seconds
         hideControlsTimeout = setTimeout(hideControls, 6000);
     };
 }
@@ -149,7 +149,7 @@ function onPlayerStateChange(index) {
             customPlayButton.style.display = 'none'; // Hide custom play button when playing
             setTimeout(() => {
                 customControls.classList.add('hidden');
-            }, 4000); // Hide controls after 4 seconds of play
+            }, 6000); // Hide controls after 6 seconds of play
         } else {
             customPlayButton.style.display = 'block'; // Show custom play button when paused or ended
             customControls.classList.remove('hidden'); // Show controls when paused or ended
