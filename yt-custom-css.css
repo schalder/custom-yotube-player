@@ -126,7 +126,7 @@
     }
     .custom-controls input[type="range"].progress,
     .custom-controls input[type="range"].volume {
-        width: calc(100% - 10px);
+        /*width: calc(100% - 10px);*/
         margin: 5px 0;
     }
     .video-container iframe {
