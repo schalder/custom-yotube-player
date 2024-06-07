@@ -1,5 +1,4 @@
 let players = [];
-let hideControlsTimeout;
 
 function onYouTubeIframeAPIReady() {
     console.log("YouTube Iframe API is ready.");
@@ -39,8 +38,17 @@ function onPlayerReady(index) {
     return function(event) {
         console.log(`Player ${index} is ready.`);
         const container = document.querySelectorAll('.video-container')[index];
-        const customControls = container.querySelector('.custom-controls');
+        const playPauseButton = container.querySelector('.play-pause');
         const customPlayButton = container.querySelector('.custom-play-button');
+        const muteUnmuteButton = container.querySelector('.mute-unmute');
+        const progressBar = container.querySelector('.progress');
+        const volumeControl = container.querySelector('.volume');
+        const videoOverlay = container.querySelector('.video-overlay');
+        const timeDisplay = container.querySelector('.time-display');
+        const fullScreenButton = container.querySelector('.full-screen');
+        const customControls = container.querySelector('.custom-controls');
+
+        let hideControlsTimeout;
 
         function showControls() {
             customControls.classList.remove('hidden');
@@ -51,22 +59,73 @@ function onPlayerReady(index) {
         }
 
         function hideControls() {
-            if (!isMouseOverControlBar(container)) {
+            if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
                 customControls.classList.add('hidden');
             }
         }
 
-        function isMouseOverControlBar(container) {
-            const rect = container.getBoundingClientRect();
-            const mouseX = event.clientX;
-            const mouseY = event.clientY;
-            return (
-                mouseX >= rect.left &&
-                mouseX <= rect.right &&
-                mouseY >= rect.top &&
-                mouseY <= rect.bottom
-            );
+        customPlayButton.onclick = videoOverlay.onclick = function() {
+            if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
+                players[index].pauseVideo();
+                playPauseButton.innerHTML = '<i class="fa-solid fa-play"></i>';
+            } else {
+                players[index].playVideo();
+                playPauseButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            }
+        };
+
+        playPauseButton.onclick = function() {
+            if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
+                players[index].pauseVideo();
+                playPauseButton.innerHTML = '<i class="fa-solid fa-play"></i>';
+            } else {
+                players[index].playVideo();
+                playPauseButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            }
+        };
+
+        muteUnmuteButton.onclick = function() {
+            if (players[index].isMuted()) {
+                players[index].unMute();
+                muteUnmuteButton.innerHTML = '<i class="fas fa-volume-up"></i>';
+            } else {
+                players[index].mute();
+                muteUnmuteButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            }
+        };
+
+        progressBar.oninput = function() {
+            const duration = players[index].getDuration();
+            const seekTo = duration * (progressBar.value / 100);
+            players[index].seekTo(seekTo, true);
+        };
+
+        volumeControl.oninput = function() {
+            const volume = volumeControl.value;
+            players[index].setVolume(volume);
+        };
+
+        fullScreenButton.addEventListener('click', () => toggleFullScreen(container));
+
+        function toggleFullScreen(container) {
+            if (!document.fullscreenElement) {
+                container.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
         }
+
+        setInterval(() => {
+            const currentTime = players[index].getCurrentTime();
+            const duration = players[index].getDuration();
+            progressBar.value = (currentTime / duration) * 100;
+
+            const minutes = Math.floor(currentTime / 60);
+            const seconds = Math.floor(currentTime % 60);
+            const totalMinutes = Math.floor(duration / 60);
+            const totalSeconds = Math.floor(duration % 60);
+            timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds} / ${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
+        }, 1000);
 
         container.addEventListener('mouseover', showControls);
         container.addEventListener('mouseout', () => {
@@ -80,18 +139,8 @@ function onPlayerReady(index) {
 
         // Initially hide controls after 4 seconds
         hideControlsTimeout = setTimeout(hideControls, 4000);
-
-        // Play button click event
-        customPlayButton.addEventListener('click', function() {
-            if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
-                players[index].pauseVideo();
-            } else {
-                players[index].playVideo();
-            }
-        });
     };
 }
-
 
 function onPlayerStateChange(index) {
     return function(event) {
@@ -126,26 +175,9 @@ function onPlayerStateChange(index) {
     };
 }
 
-// Prevent hiding controls when interacting with control bar
-document.querySelectorAll('.custom-controls').forEach((controlBar) => {
-    controlBar.addEventListener('mouseover', function(event) {
-        clearTimeout(hideControlsTimeout);
-    });
-
-    controlBar.addEventListener('mouseout', function(event) {
-        hideControlsTimeout = setTimeout(hideControls, 4000);
-    });
+// Disable right-click context menu on the iframe
+document.addEventListener('contextmenu', function(event) {
+    if (event.target.nodeName === 'IFRAME') {
+        event.preventDefault();
+    }
 });
-
-// Function to check if mouse is over the control bar
-function isMouseOverControlBar(container, event) {
-    const rect = container.getBoundingClientRect();
-    const mouseX = event.clientX;
-    const mouseY = event.clientY;
-    return (
-        mouseX >= rect.left &&
-        mouseX <= rect.right &&
-        mouseY >= rect.top &&
-        mouseY <= rect.bottom
-    );
-}
