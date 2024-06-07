@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     padding-top: 56.25%; /* 16:9 Aspect Ratio */
-    background: rgba(255,255,255,0);
+    background: rgba(255, 255, 255, 0);
 }
 
 .video-container .player {
@@ -49,16 +49,17 @@
     position: absolute;
     opacity: 1;
     height: 35px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
     z-index: 2147483647;
     margin: 0 auto;
     display: flex;
-    background: rgba(0, 0, 0, .6);
+    background: rgba(0, 0, 0, 0.6);
     align-items: center;
-    padding: 0px 5px;
+    padding: 0 5px;
 }
+
 .custom-controls.hidden {
     opacity: 0;
 }
@@ -80,9 +81,11 @@
     --slider-value: 0;
     cursor: pointer;
 }
+
 .custom-controls input[type="range"].progress::-webkit-slider-runnable-track {
     background: linear-gradient(to right, #3b5998 var(--slider-value)%, #555 var(--slider-value)%);
 }
+
 .custom-controls input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 15px;
@@ -90,9 +93,11 @@
     background: #fff;
     border-radius: 50%;
 }
+
 .custom-controls input[type="range"].progress::-moz-range-progress {
     background-color: #FF0000;
 }
+
 .custom-controls input[type="range"].progress::-moz-range-track {
     background-color: #555;
 }
@@ -103,12 +108,12 @@
 }
 
 .custom-controls input[type="range"].volume {
-    width: 100px;
-    height: 5px;
+    width: 5px;
+    height: 100px;
     margin-left: 10px;
     cursor: pointer;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s, visibility 0.3s;
     position: absolute;
     bottom: 45px; /* Position above the controls */
     left: 50%; /* Center horizontally */
@@ -117,6 +122,7 @@
     background: #555;
     visibility: hidden;
 }
+
 .custom-controls input[type="range"].volume.show {
     opacity: 1;
     visibility: visible;
@@ -124,7 +130,7 @@
 
 .time-display {
     color: #fff;
-    padding: 0px 8px;
+    padding: 0 8px;
 }
 
 .ytp-expand-pause-overlay .ytp-pause-overlay {
@@ -138,15 +144,18 @@
         height: auto;
         padding: 5px;
     }
+
     .custom-controls button {
         margin: 5px;
         flex: 1 1 45px;
         text-align: center;
     }
+
     .custom-controls input[type="range"].progress,
     .custom-controls input[type="range"].volume {
         margin: 5px 0;
     }
+
     .video-container iframe {
         height: 230px;
     }
