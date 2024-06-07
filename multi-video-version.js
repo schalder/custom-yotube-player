@@ -1,3 +1,6 @@
+let players = [];
+let hideControlsTimeout;
+
 function onYouTubeIframeAPIReady() {
     console.log("YouTube Iframe API is ready.");
     document.querySelectorAll('.video-container').forEach((container, index) => {
@@ -64,15 +67,13 @@ function onPlayerReady(index) {
             );
         }
 
-        container.addEventListener('mousemove', function(event) {
-            showControls();
-            clearTimeout(hideControlsTimeout);
+        container.addEventListener('mouseover', showControls);
+        container.addEventListener('mouseout', () => {
             hideControlsTimeout = setTimeout(hideControls, 4000);
         });
 
-        container.addEventListener('touchmove', function(event) {
-            showControls();
-            clearTimeout(hideControlsTimeout);
+        container.addEventListener('touchstart', showControls);
+        container.addEventListener('touchend', () => {
             hideControlsTimeout = setTimeout(hideControls, 4000);
         });
 
@@ -80,7 +81,6 @@ function onPlayerReady(index) {
         hideControlsTimeout = setTimeout(hideControls, 4000);
     };
 }
-
 
 function onPlayerStateChange(index) {
     return function(event) {
@@ -126,14 +126,15 @@ document.querySelectorAll('.custom-controls').forEach((controlBar) => {
     });
 });
 
-// Prevent hiding controls when mouse is over the video
-document.querySelectorAll('.video-container').forEach((container) => {
-    container.addEventListener('mousemove', function(event) {
-        clearTimeout(hideControlsTimeout);
-    });
-
-    container.addEventListener('touchmove', function(event) {
-        clearTimeout(hideControlsTimeout);
-    });
-});
-
+// Function to check if mouse is over the control bar
+function isMouseOverControlBar(container, event) {
+    const rect = container.getBoundingClientRect();
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+    return (
+        mouseX >= rect.left &&
+        mouseX <= rect.right &&
+        mouseY >= rect.top &&
+        mouseY <= rect.bottom
+    );
+}
