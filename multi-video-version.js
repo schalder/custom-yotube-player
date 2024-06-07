@@ -1,6 +1,3 @@
-let players = [];
-let hideControlsTimeout;
-
 function onYouTubeIframeAPIReady() {
     console.log("YouTube Iframe API is ready.");
     document.querySelectorAll('.video-container').forEach((container, index) => {
@@ -67,13 +64,15 @@ function onPlayerReady(index) {
             );
         }
 
-        container.addEventListener('mouseover', showControls);
-        container.addEventListener('mouseout', () => {
+        container.addEventListener('mousemove', function(event) {
+            showControls();
+            clearTimeout(hideControlsTimeout);
             hideControlsTimeout = setTimeout(hideControls, 4000);
         });
 
-        container.addEventListener('touchstart', showControls);
-        container.addEventListener('touchend', () => {
+        container.addEventListener('touchmove', function(event) {
+            showControls();
+            clearTimeout(hideControlsTimeout);
             hideControlsTimeout = setTimeout(hideControls, 4000);
         });
 
@@ -81,6 +80,7 @@ function onPlayerReady(index) {
         hideControlsTimeout = setTimeout(hideControls, 4000);
     };
 }
+
 
 function onPlayerStateChange(index) {
     return function(event) {
