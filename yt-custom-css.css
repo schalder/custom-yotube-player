@@ -103,44 +103,25 @@
 }
 
 .custom-controls .volume-container {
-    position: relative;
-    display: inline-block;
+    position: absolute;
+    right: 50px; /* Adjust to position relative to the mute/unmute button */
+    bottom: 45px; /* Adjust to position above the controls */
 }
 
 .custom-controls input[type="range"].volume {
-    width: 100px;
-    height: 5px;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s, visibility 0.3s;
-    position: absolute;
-    bottom: 45px; /* Position above the controls */
-    left: 50%;
-    transform: translateX(-50%) rotate(-90deg);
+    width: 5px;
+    height: 100px;
+    transform: rotate(270deg); /* Rotate to make it vertical */
     transform-origin: bottom center;
     background: #555;
     visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
 }
-
-.custom-controls .volume {
-    display: none;
-    position: absolute;
-    right: 50px; /* Adjust this to position the slider correctly */
-    bottom: 40px; /* Adjust this to position the slider correctly */
-    width: 5px;
-    height: 100px;
-    transform: rotate(-90deg); /* Rotate to make it vertical */
-    transform-origin: center;
-}
-
-.custom-controls .volume.show {
-    display: block;
-}
-
 
 .custom-controls input[type="range"].volume.show {
-    opacity: 1;
     visibility: visible;
+    opacity: 1;
 }
 
 .time-display {
