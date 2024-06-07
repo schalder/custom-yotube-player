@@ -113,7 +113,8 @@
 
 @media screen and (max-width: 640px) {
     .custom-controls {
-        flex-wrap: wrap;
+        display: flex !important;
+        /*flex-wrap: wrap;*/
         justify-content: center;
         height: auto; /* Adjust height for multiple lines */
         padding: 5px; /* Add padding to ensure spacing */
