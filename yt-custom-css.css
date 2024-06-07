@@ -96,6 +96,9 @@
 .custom-controls input[type="range"].progress::-moz-range-track {
     background-color: #555;
 }
+.custom-controls input[type="range"].volume-container {
+    position: relative;
+}
 .custom-controls input[type="range"].volume {
     width: 100px;
     height: 5px;
@@ -103,19 +106,15 @@
     cursor: pointer;
     opacity: 0;
     transition: opacity 0.3s;
+    position: absolute;
+    bottom: 45px; /* Position above the controls */
+    left: 50%; /* Center horizontally */
+    transform: rotate(-90deg) translateX(-50%);
+    transform-origin: left center;
+    background: #555;
 }
-
 .custom-controls input[type="range"].volume.show {
     opacity: 1;
-}
-
-.custom-controls input[type="range"].volume.vertical {
-    width: 5px;
-    height: 100px;
-    position: absolute;
-    bottom: 40px;
-    left: 10px;
-    transform: rotate(-90deg);
 }
 
 .time-display {
