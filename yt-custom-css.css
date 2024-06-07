@@ -1,8 +1,8 @@
 .video-container {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
-    background: rgba(255, 255, 255, 0);
+    padding-top: 56%; /* 16:9 Aspect Ratio */
+    background: rgba(255,255,255,0);
 }
 
 .video-container .player {
@@ -15,7 +15,7 @@
 
 .video-container iframe {
     width: 100%;
-    height: 100%;
+    height: 510px;
 }
 
 .video-overlay {
@@ -30,7 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; /* Add transition for smooth change */
 }
 
 .custom-play-button {
@@ -46,31 +46,30 @@
 }
 
 .custom-controls {
-    position: absolute;
-    opacity: 1;
+    position: absolute !important;
+    opacity: 1; /* Initially hidden */
     height: 35px;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
     z-index: 2147483647;
     margin: 0 auto;
-    display: flex;
-    background: rgba(0, 0, 0, 0.6);
+    display: flex !important;
+    background: rgba(0, 0, 0, .6);
     align-items: center;
-    padding: 0 5px;
+    padding: 0px 5px;
 }
-
 .custom-controls.hidden {
     opacity: 0;
 }
 
 .video-container .custom-controls button {
     cursor: pointer;
-    background: black;
-    color: white;
-    border: none;
-    padding: 5px;
-    border-radius: 3px;
+    background: black; /* Black background for buttons */
+    color: white; /* White icon color */
+    border: none; /* Remove default button border */
+    padding: 5px; /* Add padding for larger clickable area */
+    border-radius: 3px; /* Slightly round corners */
 }
 
 .custom-controls input[type="range"].progress {
@@ -81,11 +80,9 @@
     --slider-value: 0;
     cursor: pointer;
 }
-
 .custom-controls input[type="range"].progress::-webkit-slider-runnable-track {
     background: linear-gradient(to right, #3b5998 var(--slider-value)%, #555 var(--slider-value)%);
 }
-
 .custom-controls input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 15px;
@@ -93,38 +90,21 @@
     background: #fff;
     border-radius: 50%;
 }
-
 .custom-controls input[type="range"].progress::-moz-range-progress {
     background-color: #FF0000;
 }
-
 .custom-controls input[type="range"].progress::-moz-range-track {
     background-color: #555;
 }
-
-.custom-controls .volume-container {
-    position: absolute;
-    right: 50px; /* Adjust to position relative to the mute/unmute button */
-    bottom: 90px; /* Adjust to position above the controls */
-}
-
 .custom-controls input[type="range"].volume {
-    width: 5px;
-    height: 100px;
-    transform: rotate(270deg); /* Rotate to make it vertical */
-    transform-origin: bottom center;
-    background: #555;
-    opacity: 0;
-    transition: opacity 0.3s; /* Remove visibility transition */
-}
-
-.custom-controls input[type="range"].volume.show {
-    opacity: 1;
+    width: 100px;
+    margin-left: 10px;
+    cursor: pointer;
 }
 
 .time-display {
     color: #fff;
-    padding: 0 8px;
+    padding: 0px 8px;
 }
 
 .ytp-expand-pause-overlay .ytp-pause-overlay {
@@ -133,23 +113,22 @@
 
 @media screen and (max-width: 640px) {
     .custom-controls {
-        display: flex;
+        display: flex !important;
+        /*flex-wrap: wrap;*/
         justify-content: center;
-        height: auto;
-        padding: 5px;
+        height: auto; /* Adjust height for multiple lines */
+        padding: 5px; /* Add padding to ensure spacing */
     }
-
     .custom-controls button {
         margin: 5px;
-        flex: 1 1 45px;
+        flex: 1 1 45px; /* Allow buttons to wrap and resize */
         text-align: center;
     }
-
     .custom-controls input[type="range"].progress,
     .custom-controls input[type="range"].volume {
+        /*width: calc(100% - 10px);*/
         margin: 5px 0;
     }
-
     .video-container iframe {
         height: 230px;
     }
