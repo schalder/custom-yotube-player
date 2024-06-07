@@ -110,14 +110,13 @@
 .custom-controls input[type="range"].volume {
     width: 5px;
     height: 100px;
-    margin-left: 10px;
     cursor: pointer;
     opacity: 0;
     transition: opacity 0.3s, visibility 0.3s;
     position: absolute;
     bottom: 45px; /* Position above the controls */
     left: 50%; /* Center horizontally */
-    transform: translateX(-50%);
+    transform: translateX(-50%) rotate(-90deg);
     transform-origin: bottom center;
     background: #555;
     visibility: hidden;
