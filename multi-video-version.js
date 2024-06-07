@@ -1,4 +1,3 @@
-
 let players = [];
 
 function onYouTubeIframeAPIReady() {
@@ -123,7 +122,9 @@ function onPlayerReady(index) {
 
             const minutes = Math.floor(currentTime / 60);
             const seconds = Math.floor(currentTime % 60);
-            timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            const totalMinutes = Math.floor(duration / 60);
+            const totalSeconds = Math.floor(duration % 60);
+            timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds} / ${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
         }, 1000);
 
         container.addEventListener('mouseover', showControls);
@@ -179,15 +180,4 @@ document.addEventListener('contextmenu', function(event) {
     if (event.target.nodeName === 'IFRAME') {
         event.preventDefault();
     }
-});
-
-document.querySelectorAll('.mute-unmute').forEach(button => {
-    button.addEventListener('mouseenter', () => {
-        const volumeControl = button.parentElement.querySelector('.volume');
-        volumeControl.classList.add('show');
-    });
-    button.addEventListener('mouseleave', () => {
-        const volumeControl = button.parentElement.querySelector('.volume');
-        volumeControl.classList.remove('show');
-    });
 });
