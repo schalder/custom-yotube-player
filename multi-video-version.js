@@ -75,10 +75,10 @@ function onPlayerReady(index) {
         playPauseButton.onclick = function() {
             if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
                 players[index].pauseVideo();
-                playPauseButton.innerHTML = '<i class="fa-solid fa-play"></i>'; // Show play icon
+                playPauseButton.innerHTML = '<i class="fa-solid fa-play"></i>';
             } else {
                 players[index].playVideo();
-                playPauseButton.innerHTML = '<i class="fa-solid fa-pause"></i>'; // Show pause icon
+                playPauseButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
             }
         };
 
@@ -115,9 +115,11 @@ function onPlayerReady(index) {
 
         setInterval(() => {
             const currentTime = players[index].getCurrentTime();
+            const duration = players[index].getDuration();
+            progressBar.value = (currentTime / duration) * 100;
+
             const minutes = Math.floor(currentTime / 60);
             const seconds = Math.floor(currentTime % 60);
-            progressBar.value = (currentTime / players[index].getDuration()) * 100;
             timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         }, 1000);
 
@@ -143,18 +145,15 @@ function onPlayerStateChange(index) {
         const customPlayButton = container.querySelector('.custom-play-button');
         const videoOverlay = container.querySelector('.video-overlay');
         const customControls = container.querySelector('.custom-controls');
-        const playPauseButton = container.querySelector('.play-pause');
 
         if (event.data === YT.PlayerState.PLAYING) {
             customPlayButton.style.display = 'none'; // Hide custom play button when playing
-            playPauseButton.innerHTML = '<i class="fa-solid fa-pause"></i>'; // Show pause icon
             setTimeout(() => {
                 customControls.classList.add('hidden');
             }, 4000); // Hide controls after 4 seconds of play
         } else {
             customPlayButton.style.display = 'block'; // Show custom play button when paused or ended
             customControls.classList.remove('hidden'); // Show controls when paused or ended
-            playPauseButton.innerHTML = '<i class="fa-solid fa-play"></i>'; // Show play icon
         }
 
         if (event.data === YT.PlayerState.ENDED) {
