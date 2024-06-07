@@ -59,9 +59,21 @@ function onPlayerReady(index) {
         }
 
         function hideControls() {
-            if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
+            if (!isMouseOverControlBar(container)) {
                 customControls.classList.add('hidden');
             }
+        }
+
+        function isMouseOverControlBar(container) {
+            const rect = container.getBoundingClientRect();
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+            return (
+                mouseX >= rect.left &&
+                mouseX <= rect.right &&
+                mouseY >= rect.top &&
+                mouseY <= rect.bottom
+            );
         }
 
         customPlayButton.onclick = videoOverlay.onclick = function() {
@@ -172,7 +184,32 @@ function onPlayerStateChange(index) {
 
 // Disable right-click context menu on the iframe
 document.addEventListener('contextmenu', function(event) {
-    if (event.target.nodeName === 'IFRAME') {
-        event.preventDefault();
-    }
+if (event.target.nodeName === 'IFRAME') {
+event.preventDefault();
+}
+});
+
+// Function to check if mouse is over the control bar
+function isMouseOverControlBar(container, event) {
+    const rect = container.getBoundingClientRect();
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+    return (
+        mouseX >= rect.left &&
+        mouseX <= rect.right &&
+        mouseY >= rect.top &&
+        mouseY <= rect.bottom
+    );
+}
+
+
+// Prevent hiding controls when interacting with control bar
+document.querySelectorAll('.custom-controls').forEach((controlBar) => {
+    controlBar.addEventListener('mouseover', function(event) {
+        clearTimeout(hideControlsTimeout);
+    });
+
+    controlBar.addEventListener('mouseout', function(event) {
+        hideControlsTimeout = setTimeout(hideControls, 4000);
+    });
 });
