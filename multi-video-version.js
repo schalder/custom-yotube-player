@@ -54,7 +54,7 @@ function onPlayerReady(index) {
             customControls.classList.remove('hidden');
             clearTimeout(hideControlsTimeout);
             if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
-                hideControlsTimeout = setTimeout(hideControls, 4000);
+                hideControlsTimeout = setTimeout(hideControls, 6000);
             }
         }
 
