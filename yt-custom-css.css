@@ -96,9 +96,12 @@
 .custom-controls input[type="range"].progress::-moz-range-track {
     background-color: #555;
 }
-.custom-controls input[type="range"].volume-container {
+
+.custom-controls .volume-container {
     position: relative;
+    display: inline-block;
 }
+
 .custom-controls input[type="range"].volume {
     width: 100px;
     height: 5px;
@@ -109,12 +112,14 @@
     position: absolute;
     bottom: 45px; /* Position above the controls */
     left: 50%; /* Center horizontally */
-    transform: rotate(-90deg) translateX(-50%);
-    transform-origin: left center;
+    transform: translateX(-50%);
+    transform-origin: bottom center;
     background: #555;
+    visibility: hidden;
 }
 .custom-controls input[type="range"].volume.show {
     opacity: 1;
+    visibility: visible;
 }
 
 .time-display {
