@@ -145,8 +145,27 @@ function onPlayerReady(index) {
 
         // Initially hide controls after 6 seconds
         hideControlsTimeout = setTimeout(hideControls, 6000);
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            switch (event.key) {
+                case 'ArrowRight':
+                    players[index].seekTo(players[index].getCurrentTime() + 10, true); // Forward 10 seconds
+                    break;
+                case 'ArrowLeft':
+                    players[index].seekTo(players[index].getCurrentTime() - 10, true); // Backward 10 seconds
+                    break;
+                case 'ArrowUp':
+                    players[index].setVolume(Math.min(players[index].getVolume() + 10, 100)); // Increase volume
+                    break;
+                case 'ArrowDown':
+                    players[index].setVolume(Math.max(players[index].getVolume() - 10, 0)); // Decrease volume
+                    break;
+            }
+        });
     };
 }
+
 
 function onPlayerStateChange(index) {
     return function(event) {
