@@ -143,6 +143,16 @@ function onPlayerReady(index) {
             hideControlsTimeout = setTimeout(hideControls, 6000);
         });
 
+        // Touch events on custom controls
+        customControls.addEventListener('touchstart', () => {
+            clearTimeout(hideControlsTimeout);
+            showControls();
+        });
+
+        customControls.addEventListener('touchend', () => {
+            hideControlsTimeout = setTimeout(hideControls, 6000);
+        });
+
         // Initially hide controls after 6 seconds
         hideControlsTimeout = setTimeout(hideControls, 6000);
 
@@ -165,7 +175,6 @@ function onPlayerReady(index) {
         });
     };
 }
-
 
 function onPlayerStateChange(index) {
     return function(event) {
