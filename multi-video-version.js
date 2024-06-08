@@ -53,15 +53,20 @@ function onPlayerReady(index) {
         function showControls() {
             customControls.classList.remove('hidden');
             clearTimeout(hideControlsTimeout);
-            if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
-                hideControlsTimeout = setTimeout(hideControls, 6000);
-            }
         }
 
         function hideControls() {
             if (players[index].getPlayerState() === YT.PlayerState.PLAYING) {
                 customControls.classList.add('hidden');
             }
+        }
+
+        function scheduleHideControls() {
+            hideControlsTimeout = setTimeout(() => {
+                if (!container.matches(':hover') && !customControls.matches(':hover')) {
+                    hideControls();
+                }
+            }, 6000);
         }
 
         customPlayButton.onclick = videoOverlay.onclick = function() {
@@ -122,36 +127,19 @@ function onPlayerReady(index) {
             timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         }, 1000);
 
-        // Change mouseout event to mouseleave on the container
-        container.addEventListener('mouseleave', () => {
-            hideControlsTimeout = setTimeout(hideControls, 6000);
-        });
+        // Event listeners for mouse enter and leave
+        container.addEventListener('mouseenter', showControls);
+        customControls.addEventListener('mouseenter', showControls);
 
-        // Change mouseover event to mouseenter on the container
-        container.addEventListener('mouseenter', () => {
-            clearTimeout(hideControlsTimeout);
-            showControls();
-        });
+        container.addEventListener('mouseleave', scheduleHideControls);
+        customControls.addEventListener('mouseleave', scheduleHideControls);
 
         // Touch events
-        container.addEventListener('touchstart', () => {
-            clearTimeout(hideControlsTimeout);
-            showControls();
-        });
+        container.addEventListener('touchstart', showControls);
+        customControls.addEventListener('touchstart', showControls);
 
-        container.addEventListener('touchend', () => {
-            hideControlsTimeout = setTimeout(hideControls, 6000);
-        });
-
-        // Touch events on custom controls
-        customControls.addEventListener('touchstart', () => {
-            clearTimeout(hideControlsTimeout);
-            showControls();
-        });
-
-        customControls.addEventListener('touchend', () => {
-            hideControlsTimeout = setTimeout(hideControls, 6000);
-        });
+        container.addEventListener('touchend', scheduleHideControls);
+        customControls.addEventListener('touchend', scheduleHideControls);
 
         // Initially hide controls after 6 seconds
         hideControlsTimeout = setTimeout(hideControls, 6000);
@@ -175,6 +163,7 @@ function onPlayerReady(index) {
         });
     };
 }
+
 
 function onPlayerStateChange(index) {
     return function(event) {
