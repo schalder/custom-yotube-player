@@ -1,3 +1,5 @@
+let players = [];
+
 function onYouTubeIframeAPIReady() {
     console.log("YouTube Iframe API is ready.");
     document.querySelectorAll('.video-container').forEach((container, index) => {
