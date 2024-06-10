@@ -129,3 +129,36 @@
     }
 }
 
+/* Adjusted size and spacing for the progress slider */
+@media screen and (max-width: 640px) {
+    .custom-controls input[type="range"].progress {
+        flex: 1;
+        margin-right: 5px; /* Adjusted spacing */
+        margin-left: 5px; /* Adjusted spacing */
+        background: #555;
+        --slider-value: 0;
+        cursor: pointer;
+    }
+
+    /* Adjusted appearance for the progress slider track */
+    .custom-controls input[type="range"].progress::-webkit-slider-runnable-track {
+        background: linear-gradient(to right, #3b5998 var(--slider-value)%, #555 var(--slider-value)%);
+    }
+
+    /* Adjusted size and appearance for the progress slider thumb */
+    .custom-controls input[type="range"].progress::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 15px;
+        height: 15px;
+        background: #fff;
+        border-radius: 50%;
+    }
+
+    /* Adjusted size for the volume slider */
+    .custom-controls input[type="range"].volume {
+        width: 70px; /* Reduced width */
+        margin-left: 5px; /* Adjusted spacing */
+        cursor: pointer;
+    }
+}
+
