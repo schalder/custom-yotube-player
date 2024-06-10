@@ -114,14 +114,14 @@
 /* Adjusted CSS for smaller screens */
 @media screen and (max-width: 640px) {
     .custom-play-button {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
     }
 }
 
 @media screen and (max-width: 640px) {
     .video-container {
-        padding-top: 30%; /* Adjust aspect ratio for smaller screens */
+        padding-top: 29.4642857%; /* Adjust aspect ratio for smaller screens */
     }
     
     .video-container iframe {
