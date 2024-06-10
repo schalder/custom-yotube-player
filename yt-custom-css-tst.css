@@ -121,10 +121,34 @@
 
 @media screen and (max-width: 640px) {
     .video-container {
-        padding-top: 29.4642857%; /* Adjust aspect ratio for smaller screens */
+        padding-top: 55%; /* Adjust aspect ratio for smaller screens */
     }
     
     .video-container iframe {
-        height: 230px; /* Reduce height for smaller screens */
+        height: 100%; /* Reduce height for smaller screens */
     }
 }
+
+@media screen and (max-width: 640px) {
+    .custom-controls {
+        height: auto; /* Adjust height for multiple lines */
+        padding: 5px; /* Add padding to ensure spacing */
+        bottom: 0; /* Align control bar to the bottom of the video */
+    }
+
+    .custom-controls button {
+        margin: 5px; /* Add margin between buttons */
+        flex: 0 0 auto; /* Prevent buttons from shrinking */
+        width: auto; /* Allow buttons to expand as needed */
+    }
+
+    .custom-controls input[type="range"].progress,
+    .custom-controls input[type="range"].volume {
+        margin: 5px 0; /* Add vertical margin between sliders */
+        flex-grow: 1; /* Allow sliders to expand to fill available space */
+        width: auto; /* Allow sliders to expand as needed */
+    }
+}
+
+
+
