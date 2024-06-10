@@ -110,3 +110,22 @@
 .ytp-expand-pause-overlay .ytp-pause-overlay {
     display: none !important;
 }
+
+/* Adjusted CSS for smaller screens */
+@media screen and (max-width: 640px) {
+    .custom-play-button {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .video-container {
+        padding-top: 30%; /* Adjust aspect ratio for smaller screens */
+    }
+    
+    .video-container iframe {
+        height: 230px; /* Reduce height for smaller screens */
+    }
+}
+
