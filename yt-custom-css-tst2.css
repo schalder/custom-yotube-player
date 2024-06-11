@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     padding-top: 55%; /* 16:9 Aspect Ratio */
-    background: rgba(255,255,255,0);
+    background: rgba(255, 255, 255, 0);
 }
 
 .video-container .player {
@@ -15,7 +15,7 @@
 
 .video-container iframe {
     width: 100%;
-    height: 100%;
+    height: 510px;
 }
 
 .video-overlay {
@@ -43,20 +43,20 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1100; /* Ensure it appears on top of the overlay */
+    z-index: 1001; /* Ensure play button is above overlay */
 }
 
 .custom-controls {
-    position: absolute;
+    position: absolute !important;
     opacity: 1; /* Initially hidden */
     height: 35px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1200; /* Ensure it appears on top of other elements */
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 2147483647;
     margin: 0 auto;
     display: flex !important;
-    background: rgba(0, 0, 0, .6);
+    background: rgba(0, 0, 0, 0.6);
     align-items: center;
     padding: 0px 5px;
 }
@@ -78,6 +78,7 @@
     margin-right: 10px;
     margin-left: 10px;
     background: #555;
+    --slider-value: 0;
     cursor: pointer;
 }
 .custom-controls input[type="range"].progress::-webkit-slider-runnable-track {
@@ -117,40 +118,49 @@
         width: 90px;
         height: 90px;
     }
+
     .video-container {
         padding-top: 55%; /* Adjust aspect ratio for smaller screens */
     }
+
     .video-container iframe {
         height: 100%; /* Reduce height for smaller screens */
     }
+
     .custom-controls {
         height: auto; /* Adjust height for multiple lines */
         padding: 0px; /* Add padding to ensure spacing */
         bottom: 0; /* Align control bar to the bottom of the video */
     }
+
     .custom-controls button {
         margin: 5px; /* Add margin between buttons */
         flex: 0 0 auto; /* Prevent buttons from shrinking */
         width: auto; /* Allow buttons to expand as needed */
     }
+
     .custom-controls input[type="range"].progress {
         margin: 5px 0; /* Add vertical margin between sliders */
         flex-grow: 1; /* Allow sliders to expand to fill available space */
         width: auto; /* Allow sliders to expand as needed */
     }
-    /* Adjusted size and spacing for the progress slider */
+}
+
+/* Adjusted size and spacing for the progress slider */
+@media screen and (max-width: 640px) {
     .custom-controls input[type="range"].progress {
         flex: 1;
         margin-right: 5px; /* Adjusted spacing */
         margin-left: 5px; /* Adjusted spacing */
         background: #555;
+        --slider-value: 0;
         cursor: pointer;
     }
-    /* Adjusted appearance for the progress slider track */
+
     .custom-controls input[type="range"].progress::-webkit-slider-runnable-track {
         background: linear-gradient(to right, #3b5998 var(--slider-value)%, #555 var(--slider-value)%);
     }
-    /* Adjusted size and appearance for the progress slider thumb */
+
     .custom-controls input[type="range"].progress::-webkit-slider-thumb {
         -webkit-appearance: none;
         width: 15px;
@@ -158,7 +168,7 @@
         background: #fff;
         border-radius: 50%;
     }
-    /* Adjusted size for the volume slider */
+
     .custom-controls input[type="range"].volume {
         width: 70px; /* Reduced width */
         margin-left: 5px; /* Adjusted spacing */
