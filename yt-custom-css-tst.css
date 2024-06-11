@@ -132,7 +132,7 @@
 @media screen and (max-width: 640px) {
     .custom-controls {
         height: auto; /* Adjust height for multiple lines */
-        padding: 5px; /* Add padding to ensure spacing */
+        padding: 0px; /* Add padding to ensure spacing */
         bottom: 0; /* Align control bar to the bottom of the video */
     }
 
