@@ -146,7 +146,7 @@
     .custom-controls input[type="range"].volume {
         margin: 5px 0; /* Add vertical margin between sliders */
         flex-grow: 1; /* Allow sliders to expand to fill available space */
-        width: auto; /* Allow sliders to expand as needed */
+        width: 105px; /* Allow sliders to expand as needed */
     }
 }
 
