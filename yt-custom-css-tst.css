@@ -159,6 +159,7 @@
         background: #555;
         --slider-value: 0;
         cursor: pointer;
+         width: 50px; /* Reduced width */
     }
 
     /* Adjusted appearance for the progress slider track */
@@ -177,7 +178,7 @@
 
     /* Adjusted size for the volume slider */
     .custom-controls input[type="range"].volume {
-        width: 70px; /* Reduced width */
+        width: 40px; /* Reduced width */
         margin-left: 5px; /* Adjusted spacing */
         cursor: pointer;
     }
