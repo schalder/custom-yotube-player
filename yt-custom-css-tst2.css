@@ -138,12 +138,6 @@
         flex: 0 0 auto; /* Prevent buttons from shrinking */
         width: auto; /* Allow buttons to expand as needed */
     }
-
-    .custom-controls input[type="range"].progress {
-        margin: 5px 0; /* Add vertical margin between sliders */
-        flex-grow: 1; /* Allow sliders to expand to fill available space */
-        width: auto; /* Allow sliders to expand as needed */
-    }
 }
 
 /* Adjusted size and spacing for the progress slider */
@@ -155,6 +149,7 @@
         background: #555;
         --slider-value: 0;
         cursor: pointer;
+        width: 50px;
     }
 
     .custom-controls input[type="range"].progress::-webkit-slider-runnable-track {
@@ -170,7 +165,7 @@
     }
 
     .custom-controls input[type="range"].volume {
-        width: 70px; /* Reduced width */
+        width: 40px; /* Reduced width */
         margin-left: 5px; /* Adjusted spacing */
         cursor: pointer;
     }
